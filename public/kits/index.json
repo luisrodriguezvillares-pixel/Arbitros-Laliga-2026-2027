@@ -1,0 +1,189 @@
+{
+  "athletic-club": {
+    "team": "ATHLETIC CLUB",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png"
+    ]
+  },
+  "atletico-de-madrid": {
+    "team": "ATLÉTICO DE MADRID",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "portero-local.png",
+      "portero-visitante.png",
+      "portero-alternativa.png"
+    ]
+  },
+  "ca-osasuna": {
+    "team": "CA OSASUNA",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png"
+    ]
+  },
+  "celta": {
+    "team": "CELTA",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png",
+      "portero-alternativa.png",
+      "portero-cuarta.png"
+    ]
+  },
+  "deportivo-alaves": {
+    "team": "DEPORTIVO ALAVÉS",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png"
+    ]
+  },
+  "elche-cf": {
+    "team": "ELCHE CF",
+    "files": [
+      "local.png",
+      "alternativa.png"
+    ]
+  },
+  "fc-barcelona": {
+    "team": "FC BARCELONA",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png"
+    ]
+  },
+  "getafe-cf": {
+    "team": "GETAFE CF",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png"
+    ]
+  },
+  "levante-ud": {
+    "team": "LEVANTE UD",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png"
+    ]
+  },
+  "malaga-cf": {
+    "team": "MÁLAGA CF",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png"
+    ]
+  },
+  "r-racing-club": {
+    "team": "R. RACING CLUB",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "portero-local.png",
+      "portero-visitante.png",
+      "portero-alternativa.png"
+    ]
+  },
+  "rayo-vallecano": {
+    "team": "RAYO VALLECANO",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "portero-local.png"
+    ]
+  },
+  "rc-deportivo": {
+    "team": "RC DEPORTIVO",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png"
+    ]
+  },
+  "rcd-espanyol-de-barcelona": {
+    "team": "RCD ESPANYOL DE BARCELONA",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png",
+      "portero-alternativa.png"
+    ]
+  },
+  "real-betis": {
+    "team": "REAL BETIS",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png"
+    ]
+  },
+  "real-madrid": {
+    "team": "REAL MADRID",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "portero-local.png",
+      "portero-visitante.png"
+    ]
+  },
+  "real-sociedad": {
+    "team": "REAL SOCIEDAD",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png"
+    ]
+  },
+  "sevilla-fc": {
+    "team": "SEVILLA FC",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png"
+    ]
+  },
+  "valencia-cf": {
+    "team": "VALENCIA CF",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png",
+      "portero-alternativa.png",
+      "portero-cuarta.png"
+    ]
+  },
+  "villarreal-cf": {
+    "team": "VILLARREAL CF",
+    "files": [
+      "local.png",
+      "visitante.png",
+      "alternativa.png",
+      "portero-local.png",
+      "portero-visitante.png",
+      "portero-alternativa.png"
+    ]
+  }
+}
