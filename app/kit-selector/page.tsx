@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { matches } from "../data/matches";
 import { teams } from "../data/teams";
@@ -77,7 +77,7 @@ function getTeamData(teamName: string) {
   return teams.find((team) => team.slug === slug);
 }
 
-export default function KitSelectorPage() {
+function KitSelectorContent() {
   const searchParams = useSearchParams();
   const matchId = searchParams.get("partido");
 
@@ -461,5 +461,12 @@ export default function KitSelectorPage() {
         </section>
       </div>
     </main>
+  );
+}
+export default function KitSelectorPage() {
+  return (
+    <Suspense fallback={<div>Cargando Kit Selector...</div>}>
+      <KitSelectorContent />
+    </Suspense>
   );
 }
