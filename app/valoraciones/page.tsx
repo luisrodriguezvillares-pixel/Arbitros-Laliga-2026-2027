@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { matches } from "../data/matches";
 import { teams } from "../data/teams";
 import { getRefereeById } from "../data/referees";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
 const teamSlugByMatchName: Record<string, string> = {
@@ -47,7 +47,7 @@ const valoradores = [
   },
 ];
 
-export default function ValoracionesPage() {
+function ValoracionesContent() {
   const searchParams = useSearchParams();
 
 const [perfil, setPerfil] = useState<Perfil | null>(null);
@@ -1442,5 +1442,12 @@ valorador_nombre:
 
       </div>
     </main>
+  );
+}
+export default function ValoracionesPage() {
+  return (
+    <Suspense fallback={<div>Cargando valoraciones...</div>}>
+      <ValoracionesContent />
+    </Suspense>
   );
 }
