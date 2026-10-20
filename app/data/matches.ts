@@ -2103,8 +2103,8 @@ export const matches: Match[] = [
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 10,
-    "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-23",
+    "kickoffTime": "21:00",
     "homeTeam": "Deportivo Alavés",
     "awayTeam": "Málaga CF",
     "status": "scheduled",
@@ -2119,7 +2119,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-02-athletic-club-getafe-cf",
@@ -2127,7 +2127,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 10,
     "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "kickoffTime": "14:00",
     "homeTeam": "Athletic Club",
     "awayTeam": "Getafe CF",
     "status": "scheduled",
@@ -2142,15 +2142,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-03-atletico-de-madrid-rc-deportivo",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 10,
-    "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-24",
+    "kickoffTime": "21:00",
     "homeTeam": "Atlético de Madrid",
     "awayTeam": "RC Deportivo",
     "status": "scheduled",
@@ -2165,7 +2165,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-04-rc-celta-real-betis",
@@ -2173,7 +2173,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 10,
     "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "kickoffTime": "16:15",
     "homeTeam": "RC Celta",
     "awayTeam": "Real Betis",
     "status": "scheduled",
@@ -2188,7 +2188,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-05-fc-barcelona-real-madrid",
@@ -2196,7 +2196,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 10,
     "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "kickoffTime": "21:00",
     "homeTeam": "FC Barcelona",
     "awayTeam": "Real Madrid",
     "status": "scheduled",
@@ -2211,15 +2211,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-06-r-racing-club-rcd-espanyol-de-barcelona",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 10,
-    "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-24",
+    "kickoffTime": "16:15",
     "homeTeam": "R. Racing Club",
     "awayTeam": "RCD Espanyol de Barcelona",
     "status": "scheduled",
@@ -2234,15 +2234,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-07-rayo-vallecano-elche-cf",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 10,
-    "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-24",
+    "kickoffTime": "14:00",
     "homeTeam": "Rayo Vallecano",
     "awayTeam": "Elche CF",
     "status": "scheduled",
@@ -2257,7 +2257,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-08-real-sociedad-levante-ud",
@@ -2265,7 +2265,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 10,
     "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "kickoffTime": "18:30",
     "homeTeam": "Real Sociedad",
     "awayTeam": "Levante UD",
     "status": "scheduled",
@@ -2280,15 +2280,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-09-sevilla-fc-ca-osasuna",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 10,
-    "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-26",
+    "kickoffTime": "21:00",
     "homeTeam": "Sevilla FC",
     "awayTeam": "CA Osasuna",
     "status": "scheduled",
@@ -2303,15 +2303,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j10-10-valencia-cf-villarreal-cf",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 10,
-    "scheduledDate": "2026-10-25",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-24",
+    "kickoffTime": "18:30",
     "homeTeam": "Valencia CF",
     "awayTeam": "Villarreal CF",
     "status": "scheduled",
@@ -2326,7 +2326,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-01-athletic-club-real-sociedad",
@@ -2334,7 +2334,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 11,
     "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "kickoffTime": "21:00",
     "homeTeam": "Athletic Club",
     "awayTeam": "Real Sociedad",
     "status": "scheduled",
@@ -2349,15 +2349,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-02-real-betis-malaga-cf",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 11,
-    "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-31",
+    "kickoffTime": "18:30",
     "homeTeam": "Real Betis",
     "awayTeam": "Málaga CF",
     "status": "scheduled",
@@ -2372,15 +2372,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-03-rc-deportivo-ca-osasuna",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 11,
-    "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "scheduledDate": "2026-11-02",
+    "kickoffTime": "21:00",
     "homeTeam": "RC Deportivo",
     "awayTeam": "CA Osasuna",
     "status": "scheduled",
@@ -2395,7 +2395,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-04-elche-cf-valencia-cf",
@@ -2403,7 +2403,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 11,
     "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "kickoffTime": "18:30",
     "homeTeam": "Elche CF",
     "awayTeam": "Valencia CF",
     "status": "scheduled",
@@ -2418,15 +2418,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-05-fc-barcelona-deportivo-alaves",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 11,
-    "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-31",
+    "kickoffTime": "21:00",
     "homeTeam": "FC Barcelona",
     "awayTeam": "Deportivo Alavés",
     "status": "scheduled",
@@ -2441,7 +2441,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-06-getafe-cf-sevilla-fc",
@@ -2449,7 +2449,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 11,
     "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "kickoffTime": "14:00",
     "homeTeam": "Getafe CF",
     "awayTeam": "Sevilla FC",
     "status": "scheduled",
@@ -2464,15 +2464,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-07-levante-ud-atletico-de-madrid",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 11,
-    "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-31",
+    "kickoffTime": "14:00",
     "homeTeam": "Levante UD",
     "awayTeam": "Atlético de Madrid",
     "status": "scheduled",
@@ -2487,7 +2487,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-08-r-racing-club-real-madrid",
@@ -2495,7 +2495,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 11,
     "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "kickoffTime": "16:15",
     "homeTeam": "R. Racing Club",
     "awayTeam": "Real Madrid",
     "status": "scheduled",
@@ -2510,15 +2510,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-09-rayo-vallecano-rc-celta",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 11,
-    "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-31",
+    "kickoffTime": "16:15",
     "homeTeam": "Rayo Vallecano",
     "awayTeam": "RC Celta",
     "status": "scheduled",
@@ -2533,15 +2533,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j11-10-villarreal-cf-rcd-espanyol-de-barcelona",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 11,
-    "scheduledDate": "2026-11-01",
-    "kickoffTime": null,
+    "scheduledDate": "2026-10-30",
+    "kickoffTime": "21:00",
     "homeTeam": "Villarreal CF",
     "awayTeam": "RCD Espanyol de Barcelona",
     "status": "scheduled",
@@ -2556,7 +2556,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-01-atletico-de-madrid-fc-barcelona",
@@ -2564,7 +2564,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 12,
     "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "kickoffTime": "21:00",
     "homeTeam": "Atlético de Madrid",
     "awayTeam": "FC Barcelona",
     "status": "scheduled",
@@ -2579,7 +2579,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-02-rc-celta-levante-ud",
@@ -2587,7 +2587,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 12,
     "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "kickoffTime": "18:30",
     "homeTeam": "RC Celta",
     "awayTeam": "Levante UD",
     "status": "scheduled",
@@ -2602,7 +2602,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-03-elche-cf-real-betis",
@@ -2610,7 +2610,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 12,
     "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "kickoffTime": "14:00",
     "homeTeam": "Elche CF",
     "awayTeam": "Real Betis",
     "status": "scheduled",
@@ -2625,15 +2625,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-04-rcd-espanyol-de-barcelona-rc-deportivo",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 12,
-    "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "scheduledDate": "2026-11-07",
+    "kickoffTime": "16:15",
     "homeTeam": "RCD Espanyol de Barcelona",
     "awayTeam": "RC Deportivo",
     "status": "scheduled",
@@ -2648,15 +2648,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-05-malaga-cf-r-racing-club",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 12,
-    "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "scheduledDate": "2026-11-07",
+    "kickoffTime": "14:00",
     "homeTeam": "Málaga CF",
     "awayTeam": "R. Racing Club",
     "status": "scheduled",
@@ -2671,15 +2671,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-06-ca-osasuna-athletic-club",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 12,
-    "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "scheduledDate": "2026-11-07",
+    "kickoffTime": "18:30",
     "homeTeam": "CA Osasuna",
     "awayTeam": "Athletic Club",
     "status": "scheduled",
@@ -2694,7 +2694,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-07-real-sociedad-rayo-vallecano",
@@ -2702,7 +2702,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 12,
     "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "kickoffTime": "16:15",
     "homeTeam": "Real Sociedad",
     "awayTeam": "Rayo Vallecano",
     "status": "scheduled",
@@ -2717,15 +2717,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-08-sevilla-fc-deportivo-alaves",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 12,
-    "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "scheduledDate": "2026-11-06",
+    "kickoffTime": "21:00",
     "homeTeam": "Sevilla FC",
     "awayTeam": "Deportivo Alavés",
     "status": "scheduled",
@@ -2740,15 +2740,15 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-09-valencia-cf-real-madrid",
     "competition": "LaLiga EA Sports",
     "season": "2026/2027",
     "matchday": 12,
-    "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "scheduledDate": "2026-11-07",
+    "kickoffTime": "21:00",
     "homeTeam": "Valencia CF",
     "awayTeam": "Real Madrid",
     "status": "scheduled",
@@ -2763,7 +2763,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j12-10-villarreal-cf-getafe-cf",
@@ -2771,7 +2771,7 @@ export const matches: Match[] = [
     "season": "2026/2027",
     "matchday": 12,
     "scheduledDate": "2026-11-08",
-    "kickoffTime": null,
+    "kickoffTime": "18:30",
     "homeTeam": "Villarreal CF",
     "awayTeam": "Getafe CF",
     "status": "scheduled",
@@ -2786,7 +2786,7 @@ export const matches: Match[] = [
       "awayGoalkeeper": null
     },
     "dateConfirmed": true,
-    "timeConfirmed": false
+    "timeConfirmed": true
   },
   {
     "id": "j13-01-deportivo-alaves-rc-deportivo",
