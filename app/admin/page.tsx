@@ -112,8 +112,7 @@ export default function AdminPage() {
             </h2>
 
             <p className="mt-3 leading-7 text-slate-600">
-              Subir, sustituir, eliminar, ocultar y publicar imágenes
-              de las 38 jornadas.
+              Asigna el árbitro principal y el VAR de cada partido.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2 text-sm font-bold">
@@ -133,6 +132,19 @@ export default function AdminPage() {
                 🗑️ Eliminar
               </span>
             </div>
+          </Link>
+
+          <Link
+            href="/admin/imagenes"
+            className="group rounded-[28px] border border-blue-200 bg-white p-8 shadow-lg transition hover:border-blue-400 hover:shadow-2xl"
+          >
+            <span className="text-5xl">📤</span>
+            <h2 className="mt-8 text-3xl font-black text-slate-950">
+              Subir imagen de designación
+            </h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              Selecciona la jornada y sube una fotografía.
+            </p>
           </Link>
 
           <div className="rounded-[28px] border border-dashed border-slate-300 bg-white/60 p-8">
