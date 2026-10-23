@@ -101,7 +101,7 @@ export default function AdminPage() {
 
         <section className="mt-10 grid gap-6 md:grid-cols-2">
           <div className="group relative rounded-[28px] border border-slate-200 bg-white p-8 shadow-lg transition duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-2xl">
-            <Link href="/admin/designaciones" aria-label="Gestionar designaciones" className="absolute inset-0 rounded-[28px]" />
+            <Link href="/designaciones" aria-label="Ver designaciones" className="absolute inset-0 rounded-[28px]" />
             <div className="flex items-start justify-between">
               <span className="text-5xl">📅</span>
               <span className="text-3xl text-blue-700 transition group-hover:translate-x-2">
