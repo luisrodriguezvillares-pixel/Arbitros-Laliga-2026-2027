@@ -168,7 +168,7 @@ const notaEnDirecto = Math.max(
   const [estado, setEstado] =
     useState<"borrador" | "directo">("borrador");
   const [valoradorSeleccionado, setValoradorSeleccionado] =
-  useState("luis-rodriguez-villares");
+  useState<string | null>(null);
 
 const [minutoAccion, setMinutoAccion] = useState("");
 const [textoAccion, setTextoAccion] = useState("");
@@ -200,7 +200,7 @@ const [acciones, setAcciones] = useState<
 
 const [verOtraCompleta, setVerOtraCompleta] = useState(false);
 async function eliminarValoracionActual() {
-  if (!match) return;
+  if (!match || !valoradorSeleccionado) return;
 
   const confirmar = window.confirm(
     "¿Seguro que quieres eliminar esta valoración? Esta acción no se puede deshacer."
@@ -273,7 +273,7 @@ const referee = getRefereeById(refereeId);
 const varReferee = getRefereeById(varRefereeId);
 
 useEffect(() => {
-  if (!match) return;
+  if (!match || !valoradorSeleccionado) return;
 
   const currentMatch = match;
 
@@ -319,7 +319,7 @@ useEffect(() => {
   if (!match) return;
 
   const currentMatch = match;
-
+  if (!valoradorSeleccionado) return;
   const otroValoradorId =
     valoradorSeleccionado === "luis-rodriguez-villares"
       ? "rodrigo-hilla-blanc"
@@ -408,7 +408,7 @@ useEffect(() => {
   if (!match) return;
 
   const currentMatch = match;
-
+  if (!valoradorSeleccionado) return;
   const otroValoradorId =
     valoradorSeleccionado === "luis-rodriguez-villares"
       ? "rodrigo-hilla-blanc"
@@ -506,7 +506,7 @@ nota_final: notaOtro,
 
   
   useEffect(() => {
-  if (!match || !datosCargados || !sesionComprobada || !puedeValorar) return;
+  if (!match || !valoradorSeleccionado || !datosCargados || !sesionComprobada || !puedeValorar) return;
   
   const timeout = setTimeout(async () => {
     setEstadoGuardado("Guardando...");
@@ -588,6 +588,37 @@ valorador_nombre:
     );
   }
 
+  if (!valoradorSeleccionado) {
+    return (
+      <main className="min-h-screen bg-slate-950 px-5 py-16 text-white">
+        <section className="mx-auto max-w-xl rounded-[28px] border border-white/15 bg-white/5 p-8 text-center">
+          <p className="text-sm font-black uppercase tracking-widest text-blue-300">Valoraciones</p>
+          <h1 className="mt-4 text-3xl font-black">¿Quién va a valorar?</h1>
+          <p className="mt-3 text-slate-300">Elige tu nombre antes de acceder al partido. Tu valoración se guardará por separado.</p>
+          <div className="mt-8 grid gap-4">
+            {valoradores.map((valorador) => (
+              <button
+                key={valorador.id}
+                type="button"
+                onClick={() => {
+                  setDatosCargados(false);
+                  setCriterios({});
+                  setComentario("");
+                  setAccionesRelevantes([]);
+                  setEstado("borrador");
+                  setValoradorSeleccionado(valorador.id);
+                }}
+                className="rounded-2xl border border-blue-400/30 bg-blue-600/20 px-6 py-5 text-lg font-black text-white transition hover:bg-blue-600/40"
+              >
+                {valorador.nombre} →
+              </button>
+            ))}
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   if (!match) {
     const partidosDeJornada = matches
       .filter((partido) => partido.matchday === jornadaSeleccionada)
@@ -648,21 +679,8 @@ valorador_nombre:
     Valorador
   </p>
 
-  <div className="flex flex-wrap gap-3">
-    {valoradores.map((valorador) => (
-      <button
-        key={valorador.id}
-        type="button"
-        onClick={() => setValoradorSeleccionado(valorador.id)}
-        className={`rounded-2xl px-5 py-3 text-sm font-black transition ${
-          valoradorSeleccionado === valorador.id
-            ? "bg-blue-600 text-white shadow-lg"
-            : "border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
-        }`}
-      >
-        {valorador.nombre}
-      </button>
-    ))}
+  <div className="inline-flex rounded-2xl border border-blue-400/30 bg-blue-600/20 px-5 py-3 text-sm font-black text-blue-100">
+    {valoradores.find((v) => v.id === valoradorSeleccionado)?.nombre}
   </div>
 </div>
 
