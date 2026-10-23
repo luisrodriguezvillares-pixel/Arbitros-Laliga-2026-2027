@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import SubirImagenDesignacion from "./SubirImagenDesignacion";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
@@ -8,6 +9,7 @@ type EstadoAcceso = "comprobando" | "admin" | "denegado";
 
 export default function AdminPage() {
   const [estado, setEstado] = useState<EstadoAcceso>("comprobando");
+  const [mostrarSubir, setMostrarSubir] = useState(false);
 
   useEffect(() => {
     async function comprobarAdministrador() {
@@ -96,10 +98,8 @@ export default function AdminPage() {
         </header>
 
         <section className="mt-10 grid gap-6 md:grid-cols-2">
-          <Link
-            href="/admin/designaciones"
-            className="group rounded-[28px] border border-slate-200 bg-white p-8 shadow-lg transition duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-2xl"
-          >
+          <div className="group relative rounded-[28px] border border-slate-200 bg-white p-8 shadow-lg transition duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-2xl">
+            <Link href="/admin/designaciones" aria-label="Gestionar designaciones" className="absolute inset-0 rounded-[28px]" />
             <div className="flex items-start justify-between">
               <span className="text-5xl">📅</span>
               <span className="text-3xl text-blue-700 transition group-hover:translate-x-2">
@@ -112,13 +112,18 @@ export default function AdminPage() {
             </h2>
 
             <p className="mt-3 leading-7 text-slate-600">
-              Asigna el árbitro principal y el VAR de cada partido.
+              Subir, sustituir, eliminar, ocultar y publicar imágenes
+              de las 38 jornadas.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2 text-sm font-bold">
-              <span className="rounded-full bg-blue-50 px-3 py-2 text-blue-700">
+              <button
+                type="button"
+                onClick={() => setMostrarSubir(true)}
+                className="relative z-10 rounded-full bg-blue-50 px-3 py-2 text-blue-700 transition hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+              >
                 📤 Subir
-              </span>
+              </button>
 
               <span className="rounded-full bg-amber-50 px-3 py-2 text-amber-700">
                 🔄 Sustituir
@@ -132,20 +137,7 @@ export default function AdminPage() {
                 🗑️ Eliminar
               </span>
             </div>
-          </Link>
-
-          <Link
-            href="/admin/imagenes"
-            className="group rounded-[28px] border border-blue-200 bg-white p-8 shadow-lg transition hover:border-blue-400 hover:shadow-2xl"
-          >
-            <span className="text-5xl">📤</span>
-            <h2 className="mt-8 text-3xl font-black text-slate-950">
-              Subir imagen de designación
-            </h2>
-            <p className="mt-3 leading-7 text-slate-600">
-              Selecciona la jornada y sube una fotografía.
-            </p>
-          </Link>
+          </div>
 
           <div className="rounded-[28px] border border-dashed border-slate-300 bg-white/60 p-8">
             <span className="text-5xl">⭐</span>
@@ -161,6 +153,9 @@ export default function AdminPage() {
           </div>
         </section>
       </div>
+          {mostrarSubir && (
+        <SubirImagenDesignacion onClose={() => setMostrarSubir(false)} />
+      )}
     </main>
   );
 }
