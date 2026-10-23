@@ -121,15 +121,30 @@ function KitSelectorContent() {
   const [selectedRefereeKit, setSelectedRefereeKit] =
     useState<string>("amarilla");
 
+  const [jornadaSeleccionada, setJornadaSeleccionada] = useState(1);
   if (!match) {
+    const partidosDeJornada = matches
+      .filter((partido) => partido.matchday === jornadaSeleccionada)
+      .sort((a, b) => `${a.scheduledDate}T${a.kickoffTime ?? "23:59"}`.localeCompare(`${b.scheduledDate}T${b.kickoffTime ?? "23:59"}`));
     return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
-        <div className="text-center">
-          <h1 className="text-3xl font-black">Kit Selector</h1>
-
-          <p className="mt-4 text-slate-400">
-            Selecciona primero un partido.
-          </p>
+      <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
+        <div className="mx-auto max-w-5xl">
+          <h1 className="text-4xl font-black">Kit Selector</h1>
+          <p className="mt-3 text-slate-300">Selecciona un partido para ver las equipaciones de los equipos, sus porteros y el árbitro.</p>
+          <label htmlFor="jornada-kit-selector" className="mt-8 block font-bold">Jornada</label>
+          <select id="jornada-kit-selector" value={jornadaSeleccionada} onChange={(e) => setJornadaSeleccionada(Number(e.target.value))} className="mt-2 w-full max-w-xs rounded-xl border border-white/20 bg-slate-800 px-4 py-3 text-white">
+            {Array.from({ length: 38 }, (_, index) => index + 1).map((numero) => <option key={numero} value={numero}>Jornada {numero}</option>)}
+          </select>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {partidosDeJornada.map((partido) => (
+              <Link key={partido.id} href={`/kit-selector?partido=${encodeURIComponent(partido.id)}`} className="rounded-2xl border border-white/15 bg-white/5 p-5 transition hover:border-blue-400 hover:bg-white/10">
+                <span className="text-sm font-bold text-blue-300">Jornada {partido.matchday} · {partido.scheduledDate} · {partido.kickoffTime ?? "Hora pendiente"}</span>
+                <span className="mt-2 block text-lg font-black">{partido.homeTeam} – {partido.awayTeam}</span>
+                <span className="mt-3 block text-sm font-bold text-blue-300">Elegir equipaciones →</span>
+              </Link>
+            ))}
+            {partidosDeJornada.length === 0 && <p className="text-slate-300">No hay partidos cargados para esta jornada.</p>}
+          </div>
         </div>
       </main>
     );

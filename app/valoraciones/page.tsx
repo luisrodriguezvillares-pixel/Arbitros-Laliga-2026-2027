@@ -52,6 +52,7 @@ function ValoracionesContent() {
 
 const [perfil, setPerfil] = useState<Perfil | null>(null);
 const [sesionComprobada, setSesionComprobada] = useState(false);
+  const [jornadaSeleccionada, setJornadaSeleccionada] = useState(1);
 
 const puedeValorar =
   perfil?.rol === "admin" || perfil?.rol === "valorador";
@@ -587,6 +588,33 @@ valorador_nombre:
     );
   }
 
+  if (!match) {
+    const partidosDeJornada = matches
+      .filter((partido) => partido.matchday === jornadaSeleccionada)
+      .sort((a, b) => `${a.scheduledDate}T${a.kickoffTime ?? "23:59"}`.localeCompare(`${b.scheduledDate}T${b.kickoffTime ?? "23:59"}`));
+    return (
+      <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
+        <div className="mx-auto max-w-5xl">
+          <h1 className="text-4xl font-black">Valoraciones arbitrales</h1>
+          <p className="mt-3 text-slate-300">Selecciona una jornada y después el partido que quieras valorar.</p>
+          <label htmlFor="jornada-valoraciones" className="mt-8 block font-bold">Jornada</label>
+          <select id="jornada-valoraciones" value={jornadaSeleccionada} onChange={(e) => setJornadaSeleccionada(Number(e.target.value))} className="mt-2 w-full max-w-xs rounded-xl border border-white/20 bg-slate-800 px-4 py-3 text-white">
+            {Array.from({ length: 38 }, (_, index) => index + 1).map((numero) => <option key={numero} value={numero}>Jornada {numero}</option>)}
+          </select>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {partidosDeJornada.map((partido) => (
+              <Link key={partido.id} href={`/valoraciones?partido=${encodeURIComponent(partido.id)}`} className="rounded-2xl border border-white/15 bg-white/5 p-5 transition hover:border-blue-400 hover:bg-white/10">
+                <span className="text-sm font-bold text-blue-300">Jornada {partido.matchday} · {partido.scheduledDate} · {partido.kickoffTime ?? "Hora pendiente"}</span>
+                <span className="mt-2 block text-lg font-black">{partido.homeTeam} – {partido.awayTeam}</span>
+                <span className="mt-3 block text-sm font-bold text-blue-300">Valorar partido →</span>
+              </Link>
+            ))}
+            {partidosDeJornada.length === 0 && <p className="text-slate-300">No hay partidos cargados para esta jornada.</p>}
+          </div>
+        </div>
+      </main>
+    );
+  }
   return (
 <main
   className="min-h-screen bg-slate-950 bg-cover bg-center bg-fixed px-5 py-10 text-white sm:px-8"
