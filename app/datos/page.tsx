@@ -145,8 +145,8 @@ export default function DatosPage() {
             const sinDatosDeBurgos = f.id === "ricardo-de-burgos-bengoetxea" &&
               f.amarillas === 0 && f.rojas === 0 && f.penaltis === 0;
             const conDatos = f.evaluados > 0 && !sinDatosDeBurgos;
-            return <tr key={f.id} className={`border-b border-white/10 transition-colors ${seleccionado === f.id ? "bg-violet-500/25 ring-1 ring-inset ring-violet-400/50" : "hover:bg-white/5"}`}>
-              <td className="p-3"><button type="button" className={`text-left font-bold transition hover:underline ${seleccionado === f.id ? "text-fuchsia-200" : "text-cyan-200 hover:text-cyan-100"}`} onClick={() => { setSeleccionado(f.id); document.getElementById("ficha-arbitro")?.scrollIntoView({ behavior: "smooth" }); }}>{f.nombre}</button></td>
+            return <tr key={f.id} className={`border-b border-white/10 transition-colors ${seleccionado === f.id ? "bg-sky-400/20 ring-1 ring-inset ring-sky-300/40" : "hover:bg-white/5"}`}>
+              <td className="p-3"><button type="button" className={`text-left font-bold transition hover:underline ${seleccionado === f.id ? "text-sky-200" : "text-cyan-200 hover:text-cyan-100"}`} onClick={() => { setSeleccionado(f.id); document.getElementById("ficha-arbitro")?.scrollIntoView({ behavior: "smooth" }); }}>{f.nombre}</button></td>
               <td className="p-3 text-right font-semibold text-slate-200">{f.pasados.length}</td>
               <td className="p-3 text-right font-bold text-amber-300">{formato(conDatos ? f.amarillas : null)}</td>
               <td className="p-3 text-right font-bold text-rose-400">{formato(conDatos ? f.rojas : null)}</td>
