@@ -1131,7 +1131,7 @@ valorador_nombre:
   ["falta_correcta", "Falta bien pitada"],
   ["falta_incorrecta", "Falta mal pitada / no pitada"],
   ["falta_peligrosa_correcta", "Falta peligrosa bien pitada (+0,5)"],
-  ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada (-0,5)"],
+  ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada -0,5"],
   ["ventaja_bien_aplicada", "Ventaja bien aplicada"],
   ["ventaja_mal_aplicada", "Ventaja mal aplicada"],
 ].map(([key, label]) => (
