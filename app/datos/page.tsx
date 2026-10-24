@@ -119,10 +119,13 @@ export default function DatosPage() {
     }), [filas, orden, busqueda]);
   const actual = filas.find(f => f.id === seleccionado);
   const columnas: { key: Orden; label: string }[] = [
-    { key: "partidos", label: "Partidos" }, { key: "amarillas", label: "🟨 Amarillas" },
-    { key: "mediaAmarillas", label: "Media 🟨" }, { key: "rojas", label: "🟥 Rojas" },
-    { key: "mediaRojas", label: "Media 🟥" }, { key: "penaltis", label: "⚽ Penaltis" },
-    { key: "mediaPenaltis", label: "Media ⚽" },
+    { key: "partidos", label: "Partidos" },
+    { key: "amarillas", label: "Tarjetas Amarillas" },
+    { key: "rojas", label: "Tarjetas Rojas" },
+    { key: "mediaAmarillas", label: "Media Amarillas" },
+    { key: "mediaRojas", label: "Media Rojas" },
+    { key: "penaltis", label: "Penaltis" },
+    { key: "mediaPenaltis", label: "Media Penaltis" },
   ];
 
   return <main className="min-h-screen bg-slate-950 px-4 py-10 text-white sm:px-8">
@@ -136,7 +139,7 @@ export default function DatosPage() {
             <label className="flex min-w-52 flex-1 flex-col gap-2 text-sm font-bold">Buscar árbitro<input value={busqueda} onChange={e => setBusqueda(e.target.value)} placeholder="Nombre del árbitro" className="rounded-xl border border-white/20 bg-slate-900 p-3 text-white" /></label>
             <label className="flex min-w-52 flex-col gap-2 text-sm font-bold">Ordenar ranking<select value={orden} onChange={e => setOrden(e.target.value as Orden)} className="rounded-xl border border-white/20 bg-slate-900 p-3 text-white">{columnas.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}</select></label>
           </div>
-          <div className="mt-5 overflow-x-auto"><table className="min-w-[860px] w-full text-left text-sm"><thead><tr className="border-b border-white/15 text-slate-300"><th className="p-3">Árbitro</th>{columnas.map(c => <th className="p-3 text-right" key={c.key}>{c.label}</th>)}</tr></thead><tbody>{ordenados.map(f => <tr key={f.id} className={`border-b border-white/10 ${seleccionado === f.id ? "bg-blue-900/25" : ""}`}><td className="p-3"><button className="text-left font-bold text-blue-200 hover:underline" onClick={() => { setSeleccionado(f.id); document.getElementById("ficha-arbitro")?.scrollIntoView({ behavior: "smooth" }); }}>{f.nombre} ↗</button></td><td className="p-3 text-right">{f.pasados.length}</td><td className="p-3 text-right">{formato(f.evaluados ? f.amarillas : null)}</td><td className="p-3 text-right">{formato(f.mediaAmarillas)}</td><td className="p-3 text-right">{formato(f.evaluados ? f.rojas : null)}</td><td className="p-3 text-right">{formato(f.mediaRojas)}</td><td className="p-3 text-right">{formato(f.evaluados ? f.penaltis : null)}</td><td className="p-3 text-right">{formato(f.mediaPenaltis)}</td></tr>)}</tbody></table></div>
+          <div className="mt-5 overflow-x-auto"><table className="min-w-[860px] w-full text-left text-sm"><thead><tr className="border-b border-white/15 text-slate-300"><th className="p-3">Árbitro</th>{columnas.map(c => <th className="p-3 text-right" key={c.key}><button type="button" onClick={() => setOrden(c.key)} aria-label={`Ordenar por ${c.label}`} aria-pressed={orden === c.key} className={`whitespace-normal text-right font-bold hover:text-white hover:underline ${orden === c.key ? "text-blue-300" : "text-slate-300"}`}>{c.key === "partidos" ? "Partidos" : c.key === "amarillas" ? <>Tarjetas<br />Amarillas</> : c.key === "rojas" ? <>Tarjetas<br />Rojas</> : c.key === "mediaAmarillas" ? <>Media<br />Amarillas</> : c.key === "mediaRojas" ? <>Media<br />Rojas</> : c.key === "penaltis" ? "Penaltis" : <>Media<br />Penaltis</>}</button></th>)}</tr></thead><tbody>{ordenados.map(f => <tr key={f.id} className={`border-b border-white/10 ${seleccionado === f.id ? "bg-blue-900/25" : ""}`}><td className="p-3"><button className="text-left font-bold text-blue-200 hover:underline" onClick={() => { setSeleccionado(f.id); document.getElementById("ficha-arbitro")?.scrollIntoView({ behavior: "smooth" }); }}>{f.nombre}</button></td><td className="p-3 text-right">{f.pasados.length}</td><td className="p-3 text-right">{formato(f.evaluados ? f.amarillas : null)}</td><td className="p-3 text-right">{formato(f.evaluados ? f.rojas : null)}</td><td className="p-3 text-right">{formato(f.mediaAmarillas)}</td><td className="p-3 text-right">{formato(f.mediaRojas)}</td><td className="p-3 text-right">{formato(f.evaluados ? f.penaltis : null)}</td><td className="p-3 text-right">{formato(f.mediaPenaltis)}</td></tr>)}</tbody></table></div>
           <p className="mt-4 text-xs leading-6 text-slate-400">Partidos: designaciones cuya fecha ya pasó (pendientes de verificar como disputados). Tarjetas y penaltis: promedios de los registros de Luis y Rodrigo por partido; no se duplican si ambos valoran. Las medias se calculan por partido valorado, no por todas las designaciones. «—» significa que no hay datos. Si las valoraciones registran decisiones correctas/incorrectas, esas cifras reflejan acciones anotadas, no necesariamente todas las tarjetas o penaltis reales.</p>
         </div>
         <section id="ficha-arbitro" className="mt-8 scroll-mt-5 rounded-2xl border border-blue-500/25 bg-white/5 p-6">
