@@ -96,50 +96,34 @@ function calcularNota(valoracion: ValoracionDB) {
 
   let nota =
     6 +
+    (c.control ?? 0) +
+    (c.colocacion ?? 0) +
     (c.buen_control ?? 0) * 0.3 -
     (c.mal_control ?? 0) * 0.3 +
-
     (c.amarilla_correcta ?? 0) * 0.75 -
     (c.amarilla_incorrecta ?? 0) * 0.75 +
-
     (c.roja_correcta ?? 0) * 1.5 -
     (c.roja_incorrecta ?? 0) * 1.5 +
-
-    (c.penalti_correcto ?? 0) * 1.5 -
-    (c.penalti_incorrecto ?? 0) * 1.5 +
-
-    /*
-      VAR:
-      Buena/mala intervención del VAR se valora ±0,25.
-      Revisiones VAR es solo informativo.
-    */
+    (c.penalti_correcto ?? 0) * 1.25 -
+    (c.penalti_incorrecto ?? 0) * 1.25 +
+    (c.falta_correcta ?? 0) * 0.25 -
+    (c.falta_incorrecta ?? 0) * 0.25 +
+    (c.falta_peligrosa_correcta ?? 0) * 0.5 -
+    (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
+    (c.ventaja_bien_aplicada ?? 0) * 0.25 -
+    (c.ventaja_mal_aplicada ?? 0) * 0.25 +
+    (c.saque_puerta_correcto ?? 0) * 0.15 -
+    (c.saque_puerta_incorrecto ?? 0) * 0.15 +
+    (c.corner_correcto ?? 0) * 0.15 -
+    (c.corner_incorrecto ?? 0) * 0.15 +
+    (c.saque_banda_correcto ?? 0) * 0.15 -
+    (c.saque_banda_incorrecto ?? 0) * 0.15 +
     (c.buena_intervencion_var ?? 0) * 0.25 -
     (c.mala_intervencion_var ?? 0) * 0.25 +
-
-    /*
-      Decisión del árbitro después de OFR/revisión.
-      Si más adelante añadimos estos dos campos al panel,
-      Rankings ya los reconocerá automáticamente.
-    */
     (c.buena_decision_revision ?? 0) * 0.5 +
-
-    /*
-      Para una mala decisión después de revisión NO usamos un valor
-      genérico aquí, porque depende de la acción concreta.
-      Esa penalización debe introducirse en Acciones relevantes:
-      por ejemplo -1,50 para roja o penalti.
-    */
-
-    (c.ventaja_bien_aplicada ?? 0) * 0.25 +
-
     (c.anadido_correcto ?? 0) * 0.25 -
     (c.anadido_incorrecto ?? 0) * 0.25;
 
-  /*
-    Las acciones escritas pueden sumar/restar directamente.
-    Ejemplo:
-      67' | Falta importante no señalada | -0,25
-  */
   const ajusteAcciones = (valoracion.decisiones_clave ?? []).reduce(
     (total, accion) => total + Number(accion.valor ?? 0),
     0

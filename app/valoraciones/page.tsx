@@ -128,6 +128,8 @@ const notaCalculada =
   // FALTAS Y VENTAJAS
   (criterios.falta_correcta ?? 0) * 0.25 -
   (criterios.falta_incorrecta ?? 0) * 0.25 +
+  (criterios.falta_peligrosa_correcta ?? 0) * 0.5 -
+  (criterios.falta_peligrosa_incorrecta ?? 0) * 0.5 +
 
   (criterios.ventaja_bien_aplicada ?? 0) * 0.25 -
   (criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
@@ -372,6 +374,8 @@ useEffect(() => {
 
             (data.criterios.falta_correcta ?? 0) * 0.25 -
             (data.criterios.falta_incorrecta ?? 0) * 0.25 +
+             (data.criterios.falta_peligrosa_correcta ?? 0) * 0.5 -
+             (data.criterios.falta_peligrosa_incorrecta ?? 0) * 0.5 +
 
             (data.criterios.ventaja_bien_aplicada ?? 0) * 0.25 -
             (data.criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
@@ -464,6 +468,8 @@ const notaOtro =
 
             (c.falta_correcta ?? 0) * 0.25 -
             (c.falta_incorrecta ?? 0) * 0.25 +
+             (c.falta_peligrosa_correcta ?? 0) * 0.5 -
+             (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
 
             (c.ventaja_bien_aplicada ?? 0) * 0.25 -
             (c.ventaja_mal_aplicada ?? 0) * 0.25 +
@@ -1124,6 +1130,8 @@ valorador_nombre:
     {[
   ["falta_correcta", "Falta bien pitada"],
   ["falta_incorrecta", "Falta mal pitada / no pitada"],
+  ["falta_peligrosa_correcta", "Falta peligrosa bien pitada (+0,5)"],
+  ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada (-0,5)"],
   ["ventaja_bien_aplicada", "Ventaja bien aplicada"],
   ["ventaja_mal_aplicada", "Ventaja mal aplicada"],
 ].map(([key, label]) => (
