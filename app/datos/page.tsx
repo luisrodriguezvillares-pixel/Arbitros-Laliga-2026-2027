@@ -48,6 +48,7 @@ export default function DatosPage() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
   const [orden, setOrden] = useState<Orden>("partidos");
+   const [pestana, setPestana] = useState<"general" | Exclude<Orden, "partidos">>("general");
   const [seleccionado, setSeleccionado] = useState<string>(principales[0]);
   const [busqueda, setBusqueda] = useState("");
 
@@ -139,7 +140,27 @@ export default function DatosPage() {
             <label className="flex min-w-52 flex-1 flex-col gap-2 text-sm font-bold">Buscar árbitro<input value={busqueda} onChange={e => setBusqueda(e.target.value)} placeholder="Nombre del árbitro" className="rounded-xl border border-white/20 bg-slate-900 p-3 text-white" /></label>
             <label className="flex min-w-52 flex-col gap-2 text-sm font-bold">Ordenar ranking<select value={orden} onChange={e => setOrden(e.target.value as Orden)} className="rounded-xl border border-white/20 bg-slate-900 p-3 text-white">{columnas.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}</select></label>
           </div>
-          <div className="mt-5 overflow-x-auto"><table className="min-w-[860px] w-full text-left text-sm"><thead><tr className="border-b border-white/15 text-slate-300"><th className="p-3">Árbitro</th>{columnas.map(c => <th className="p-3 text-right" key={c.key}><button type="button" onClick={() => setOrden(c.key)} aria-label={`Ordenar por ${c.label}`} aria-pressed={orden === c.key} className={`whitespace-normal text-right font-extrabold transition hover:brightness-125 hover:underline ${c.key === "amarillas" || c.key === "mediaAmarillas" ? "text-amber-300" : c.key === "rojas" || c.key === "mediaRojas" ? "text-rose-400" : c.key === "penaltis" || c.key === "mediaPenaltis" ? "text-white" : "text-cyan-200"} ${orden === c.key ? "underline underline-offset-8 decoration-2" : ""}`}>{c.key === "partidos" ? "Partidos" : c.key === "amarillas" ? <>Tarjetas<br />Amarillas</> : c.key === "rojas" ? <>Tarjetas<br />Rojas</> : c.key === "mediaAmarillas" ? <>Media<br />Amarillas</> : c.key === "mediaRojas" ? <>Media<br />Rojas</> : c.key === "penaltis" ? "Penaltis" : <>Media<br />Penaltis</>}</button></th>)}</tr></thead><tbody>{ordenados.map(f => {
+          {/* Pestañas de estadísticas */}
+           <nav className="mt-5 flex flex-wrap gap-2" aria-label="Categorías de estadísticas">
+             {([
+               ["general", "General"],
+               ["amarillas", "🟨 Tarjetas amarillas"],
+               ["rojas", "🟥 Tarjetas rojas"],
+               ["mediaAmarillas", "Media amarillas"],
+               ["mediaRojas", "Media rojas"],
+               ["penaltis", "⚽ Penaltis"],
+               ["mediaPenaltis", "Media penaltis"],
+             ] as const).map(([clave, titulo]) => (
+               <button key={clave} type="button"
+                 aria-pressed={pestana === clave}
+                 onClick={() => { setPestana(clave); setOrden(clave === "general" ? "partidos" : clave); }}
+                 className={`rounded-full border px-4 py-2 text-sm font-bold transition ${pestana === clave ? "border-sky-300 bg-sky-400/20 text-sky-100 shadow-sm shadow-sky-400/20" : "border-white/20 bg-white/5 text-slate-300 hover:border-sky-400/50 hover:text-white"}`}>
+                 {titulo}
+               </button>
+             ))}
+           </nav>
+           <style>{pestana === "general" ? "" : `#tabla-datos-pestanas th:not(:first-child):not(:nth-child(${({ amarillas: 3, rojas: 4, mediaAmarillas: 5, mediaRojas: 6, penaltis: 7, mediaPenaltis: 8 } as const)[pestana]})), #tabla-datos-pestanas td:not(:first-child):not(:nth-child(${({ amarillas: 3, rojas: 4, mediaAmarillas: 5, mediaRojas: 6, penaltis: 7, mediaPenaltis: 8 } as const)[pestana]})) { display: none; }`}</style>
+           <div className="mt-5 overflow-x-auto"><table id="tabla-datos-pestanas" className="min-w-[860px] w-full text-left text-sm"><thead><tr className="border-b border-white/15 text-slate-300"><th className="p-3">Árbitro</th>{columnas.map(c => <th className="p-3 text-right" key={c.key}><button type="button" onClick={() => setOrden(c.key)} aria-label={`Ordenar por ${c.label}`} aria-pressed={orden === c.key} className={`whitespace-normal text-right font-extrabold transition hover:brightness-125 hover:underline ${c.key === "amarillas" || c.key === "mediaAmarillas" ? "text-amber-300" : c.key === "rojas" || c.key === "mediaRojas" ? "text-rose-400" : c.key === "penaltis" || c.key === "mediaPenaltis" ? "text-white" : "text-cyan-200"} ${orden === c.key ? "underline underline-offset-8 decoration-2" : ""}`}>{c.key === "partidos" ? "Partidos" : c.key === "amarillas" ? <>Tarjetas<br />Amarillas</> : c.key === "rojas" ? <>Tarjetas<br />Rojas</> : c.key === "mediaAmarillas" ? <>Media<br />Amarillas</> : c.key === "mediaRojas" ? <>Media<br />Rojas</> : c.key === "penaltis" ? "Penaltis" : <>Media<br />Penaltis</>}</button></th>)}</tr></thead><tbody>{ordenados.map(f => {
             // Evita presentar como estadísticas reales el registro vacío de De Burgos.
             // No altera ni elimina ningún registro en Supabase.
             const sinDatosDeBurgos = f.id === "ricardo-de-burgos-bengoetxea" &&
