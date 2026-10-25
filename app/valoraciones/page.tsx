@@ -143,6 +143,8 @@ const notaCalculada =
 
   (criterios.saque_banda_correcto ?? 0) * 0.15 -
   (criterios.saque_banda_incorrecto ?? 0) * 0.15 +
+   (criterios.fuera_juego_correcto ?? 0) * 0.15 -
+   (criterios.fuera_juego_incorrecto ?? 0) * 0.15 +
 
   // TIEMPO AÑADIDO
   (criterios.anadido_correcto ?? 0) * 0.25 -
@@ -388,6 +390,8 @@ useEffect(() => {
 
             (data.criterios.saque_banda_correcto ?? 0) * 0.15 -
             (data.criterios.saque_banda_incorrecto ?? 0) * 0.15 +
+   (data.criterios.fuera_juego_correcto ?? 0) * 0.15 -
+   (data.criterios.fuera_juego_incorrecto ?? 0) * 0.15 +
 
             (data.criterios.anadido_correcto ?? 0) * 0.25 -
             (data.criterios.anadido_incorrecto ?? 0) * 0.25 +
@@ -482,6 +486,8 @@ const notaOtro =
 
             (c.saque_banda_correcto ?? 0) * 0.15 -
             (c.saque_banda_incorrecto ?? 0) * 0.15 +
+   (c.fuera_juego_correcto ?? 0) * 0.15 -
+   (c.fuera_juego_incorrecto ?? 0) * 0.15 +
 
             (c.anadido_correcto ?? 0) * 0.25 -
             (c.anadido_incorrecto ?? 0) * 0.25 +
@@ -1130,8 +1136,8 @@ valorador_nombre:
     {[
   ["falta_correcta", "Falta bien pitada"],
   ["falta_incorrecta", "Falta mal pitada / no pitada"],
-  ["falta_peligrosa_correcta", "Falta peligrosa bien pitada (+0,5)"],
-  ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada -0,5"],
+  ["falta_peligrosa_correcta", "Falta peligrosa bien pitada"],
+  ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada"],
   ["ventaja_bien_aplicada", "Ventaja bien aplicada"],
   ["ventaja_mal_aplicada", "Ventaja mal aplicada"],
 ].map(([key, label]) => (
@@ -1163,10 +1169,10 @@ valorador_nombre:
     </h4>
 
     <p className="mt-1 text-xs font-bold text-slate-400">
-      Saque de puerta · Córner · Saque de banda
+      Saque de puerta · Córner · Saque de banda · Fuera de juego
     </p>
 
-    <div className="mt-4 grid gap-4 lg:grid-cols-3">
+    <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {[
         [
           "Saque de puerta",
@@ -1182,6 +1188,11 @@ valorador_nombre:
           "Saque de banda",
           "saque_banda_correcto",
           "saque_banda_incorrecto",
+        ],
+        [
+          "Fuera de juego",
+          "fuera_juego_correcto",
+          "fuera_juego_incorrecto",
         ],
       ].map(([label, keyCorrecto, keyIncorrecto]) => (
         <div

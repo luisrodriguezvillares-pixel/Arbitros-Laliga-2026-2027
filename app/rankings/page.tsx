@@ -118,6 +118,8 @@ function calcularNota(valoracion: ValoracionDB) {
     (c.corner_incorrecto ?? 0) * 0.15 +
     (c.saque_banda_correcto ?? 0) * 0.15 -
     (c.saque_banda_incorrecto ?? 0) * 0.15 +
+    (c.fuera_juego_correcto ?? 0) * 0.15 -
+    (c.fuera_juego_incorrecto ?? 0) * 0.15 +
     (c.buena_intervencion_var ?? 0) * 0.25 -
     (c.mala_intervencion_var ?? 0) * 0.25 +
     (c.buena_decision_revision ?? 0) * 0.5 +
