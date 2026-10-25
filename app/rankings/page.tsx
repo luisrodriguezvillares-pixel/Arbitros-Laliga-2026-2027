@@ -127,7 +127,7 @@ function calcularNota(valoracion: ValoracionDB) {
     (c.anadido_incorrecto ?? 0) * 0.25;
 
   const ajusteAcciones = (valoracion.decisiones_clave ?? []).reduce(
-    (total, accion) => total + Number(accion.valor ?? 0),
+    (total, accion) => total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
     0
   );
 

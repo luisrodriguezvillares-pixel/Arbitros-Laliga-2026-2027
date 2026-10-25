@@ -160,7 +160,7 @@ const notaCalculada =
   }[]
 >([]);
 const valorAccionesRelevantes = accionesRelevantes.reduce(
-  (total, accion) => total + Number(accion.valor ?? 0),
+  (total, accion) => total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
   0
 );
 
@@ -397,8 +397,8 @@ useEffect(() => {
             (data.criterios.anadido_incorrecto ?? 0) * 0.25 +
 
             (data.decisiones_clave ?? []).reduce(
-              (total: number, accion: { valor?: number }) =>
-                total + Number(accion.valor ?? 0),
+              (total: number, accion: { valor?: number; decision?: "correcta" | "incorrecta" }) =>
+                total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
               0
             )
         )
@@ -493,8 +493,8 @@ const notaOtro =
             (c.anadido_incorrecto ?? 0) * 0.25 +
 
             (nueva.decisiones_clave ?? []).reduce(
-              (total: number, accion: { valor?: number }) =>
-                total + Number(accion.valor ?? 0),
+              (total: number, accion: { valor?: number; decision?: "correcta" | "incorrecta" }) =>
+                total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
               0
             )
         )
@@ -1364,11 +1364,11 @@ valorador_nombre:
   </div>
 
   {accionesRelevantes.length > 0 && (
-    <div className="mt-6 grid gap-3">
+    <div className="mt-6 grid gap-3 overflow-x-auto">
       {accionesRelevantes.map((item, index) => (
         <div
           key={`${item.minuto}-${index}`}
-          className="grid min-w-0 gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 md:grid-cols-[90px_minmax(0,1fr)_110px_130px_auto] md:items-center"
+          className="grid min-w-[680px] gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 grid-cols-[60px_minmax(0,1fr)_80px_110px_90px] items-center"
         >
           <p className="font-black text-amber-300">
             {item.minuto || "—"}
@@ -1389,15 +1389,14 @@ valorador_nombre:
 
           <p
             className={`text-lg font-black ${
-              item.valor > 0
+              item.decision === "correcta"
                 ? "text-emerald-300"
-                : item.valor < 0
+                : item.decision === "incorrecta"
                 ? "text-red-300"
                 : "text-slate-300"
             }`}
           >
-            {item.valor > 0 ? "+" : ""}
-            {Number(item.valor ?? 0).toFixed(2)}
+            {Math.abs(Number(item.valor ?? 0)).toFixed(2)}
           </p>
 
           <p
