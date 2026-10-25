@@ -1025,7 +1025,7 @@ valorador_nombre:
       <div className="grid gap-3">
         {[
           ["amarilla_correcta", "Tarjeta amarilla correcta"],
-          ["amarilla_incorrecta", "Tarjeta amarilla incorrecta"],
+          ["amarilla_incorrecta", "Tarjeta amarilla incorrecta / no señalada"],
         ].map(([key, label]) => (
           <div
             key={key}
@@ -1061,7 +1061,7 @@ valorador_nombre:
       <div className="grid gap-3">
         {[
           ["roja_correcta", "Tarjeta roja correcta"],
-          ["roja_incorrecta", "Tarjeta roja incorrecta"],
+          ["roja_incorrecta", "Tarjeta roja incorrecta / no señalada"],
         ].map(([key, label]) => (
           <div
             key={key}
@@ -1139,7 +1139,7 @@ valorador_nombre:
   ["falta_peligrosa_correcta", "Falta peligrosa bien pitada"],
   ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada"],
   ["ventaja_bien_aplicada", "Ventaja bien aplicada"],
-  ["ventaja_mal_aplicada", "Ventaja mal aplicada"],
+  ["ventaja_mal_aplicada", "Ventaja mal aplicada / no señalada"],
 ].map(([key, label]) => (
       <div
         key={key}
