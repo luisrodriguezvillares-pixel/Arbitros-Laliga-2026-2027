@@ -135,15 +135,15 @@ const notaCalculada =
   (criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
 
   // BALÓN PARADO
-  (criterios.saque_puerta_correcto ?? 0) * 0.15 -
+  (criterios.saque_puerta_correcto ?? 0) * 0.10 -
   (criterios.saque_puerta_incorrecto ?? 0) * 0.15 +
 
-  (criterios.corner_correcto ?? 0) * 0.15 -
+  (criterios.corner_correcto ?? 0) * 0.10 -
   (criterios.corner_incorrecto ?? 0) * 0.15 +
 
-  (criterios.saque_banda_correcto ?? 0) * 0.15 -
+  (criterios.saque_banda_correcto ?? 0) * 0.10 -
   (criterios.saque_banda_incorrecto ?? 0) * 0.15 +
-   (criterios.fuera_juego_correcto ?? 0) * 0.15 -
+   (criterios.fuera_juego_correcto ?? 0) * 0.10 -
    (criterios.fuera_juego_incorrecto ?? 0) * 0.15 +
 
   // TIEMPO AÑADIDO
@@ -382,15 +382,15 @@ useEffect(() => {
             (data.criterios.ventaja_bien_aplicada ?? 0) * 0.25 -
             (data.criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
 
-            (data.criterios.saque_puerta_correcto ?? 0) * 0.15 -
+            (data.criterios.saque_puerta_correcto ?? 0) * 0.10 -
             (data.criterios.saque_puerta_incorrecto ?? 0) * 0.15 +
 
-            (data.criterios.corner_correcto ?? 0) * 0.15 -
+            (data.criterios.corner_correcto ?? 0) * 0.10 -
             (data.criterios.corner_incorrecto ?? 0) * 0.15 +
 
-            (data.criterios.saque_banda_correcto ?? 0) * 0.15 -
+            (data.criterios.saque_banda_correcto ?? 0) * 0.10 -
             (data.criterios.saque_banda_incorrecto ?? 0) * 0.15 +
-   (data.criterios.fuera_juego_correcto ?? 0) * 0.15 -
+   (data.criterios.fuera_juego_correcto ?? 0) * 0.10 -
    (data.criterios.fuera_juego_incorrecto ?? 0) * 0.15 +
 
             (data.criterios.anadido_correcto ?? 0) * 0.25 -
@@ -478,15 +478,15 @@ const notaOtro =
             (c.ventaja_bien_aplicada ?? 0) * 0.25 -
             (c.ventaja_mal_aplicada ?? 0) * 0.25 +
 
-            (c.saque_puerta_correcto ?? 0) * 0.15 -
+            (c.saque_puerta_correcto ?? 0) * 0.10 -
             (c.saque_puerta_incorrecto ?? 0) * 0.15 +
 
-            (c.corner_correcto ?? 0) * 0.15 -
+            (c.corner_correcto ?? 0) * 0.10 -
             (c.corner_incorrecto ?? 0) * 0.15 +
 
-            (c.saque_banda_correcto ?? 0) * 0.15 -
+            (c.saque_banda_correcto ?? 0) * 0.10 -
             (c.saque_banda_incorrecto ?? 0) * 0.15 +
-   (c.fuera_juego_correcto ?? 0) * 0.15 -
+   (c.fuera_juego_correcto ?? 0) * 0.10 -
    (c.fuera_juego_incorrecto ?? 0) * 0.15 +
 
             (c.anadido_correcto ?? 0) * 0.25 -
