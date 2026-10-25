@@ -1374,9 +1374,21 @@ valorador_nombre:
             {item.minuto || "—"}
           </p>
 
-          <p className="font-bold text-white">
-            {item.accion}
-          </p>
+          <input
+            type="text"
+            aria-label="Motivo de la acción relevante"
+            placeholder="Escribe el motivo..."
+            value={item.accion ?? ""}
+            onChange={(e) => {
+              const motivo = e.target.value;
+              setAccionesRelevantes((actual) =>
+                actual.map((accion, i) =>
+                  i === index ? { ...accion, accion: motivo } : accion
+                )
+              );
+            }}
+            className="w-full min-w-0 rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 font-bold text-white placeholder:text-slate-400"
+          />
 
           <p
   className={`text-lg font-black ${
