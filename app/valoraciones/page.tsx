@@ -144,7 +144,7 @@ const notaCalculada =
   (criterios.saque_banda_correcto ?? 0) * 0.10 -
   (criterios.saque_banda_incorrecto ?? 0) * 0.15 +
    (criterios.fuera_juego_correcto ?? 0) * 0.10 -
-   (criterios.fuera_juego_incorrecto ?? 0) * 0.15 +
+   (criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
 
   // TIEMPO AÑADIDO
   (criterios.anadido_correcto ?? 0) * 0.25 -
@@ -391,7 +391,7 @@ useEffect(() => {
             (data.criterios.saque_banda_correcto ?? 0) * 0.10 -
             (data.criterios.saque_banda_incorrecto ?? 0) * 0.15 +
    (data.criterios.fuera_juego_correcto ?? 0) * 0.10 -
-   (data.criterios.fuera_juego_incorrecto ?? 0) * 0.15 +
+   (data.criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
 
             (data.criterios.anadido_correcto ?? 0) * 0.25 -
             (data.criterios.anadido_incorrecto ?? 0) * 0.25 +
@@ -487,7 +487,7 @@ const notaOtro =
             (c.saque_banda_correcto ?? 0) * 0.10 -
             (c.saque_banda_incorrecto ?? 0) * 0.15 +
    (c.fuera_juego_correcto ?? 0) * 0.10 -
-   (c.fuera_juego_incorrecto ?? 0) * 0.15 +
+   (c.fuera_juego_incorrecto ?? 0) * 0.20 +
 
             (c.anadido_correcto ?? 0) * 0.25 -
             (c.anadido_incorrecto ?? 0) * 0.25 +
