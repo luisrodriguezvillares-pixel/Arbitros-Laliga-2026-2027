@@ -1368,41 +1368,38 @@ valorador_nombre:
       {accionesRelevantes.map((item, index) => (
         <div
           key={`${item.minuto}-${index}`}
-          className="grid gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 md:grid-cols-[90px_1fr_110px_130px_auto] md:items-center"
+          className="grid min-w-0 gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 md:grid-cols-[90px_minmax(0,1fr)_110px_130px_auto] md:items-center"
         >
           <p className="font-black text-amber-300">
             {item.minuto || "—"}
           </p>
 
-          <input
-            type="text"
-            aria-label="Motivo de la acción relevante"
-            placeholder="Escribe el motivo..."
-            value={item.accion ?? ""}
-            onChange={(e) => {
-              const motivo = e.target.value;
-              setAccionesRelevantes((actual) =>
-                actual.map((accion, i) =>
-                  i === index ? { ...accion, accion: motivo } : accion
-                )
-              );
+          <p
+            className="min-w-0 break-words font-bold leading-6 text-white [overflow-wrap:anywhere]"
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 2,
+              overflow: "hidden",
             }}
-            className="w-full min-w-0 rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 font-bold text-white placeholder:text-slate-400"
-          />
+            title={item.accion}
+          >
+            {item.accion}
+          </p>
 
           <p
-  className={`text-lg font-black ${
-    item.valor > 0
-      ? "text-emerald-300"
-      : item.valor < 0
-      ? "text-red-300"
-      : "text-slate-300"
-  }`}
->
-  {item.valor > 0 ? "+" : ""}
-  {item.valor.toFixed(2)}
-</p>
-          
+            className={`text-lg font-black ${
+              item.valor > 0
+                ? "text-emerald-300"
+                : item.valor < 0
+                ? "text-red-300"
+                : "text-slate-300"
+            }`}
+          >
+            {item.valor > 0 ? "+" : ""}
+            {Number(item.valor ?? 0).toFixed(2)}
+          </p>
+
           <p
             className={`font-black ${
               item.decision === "correcta"
