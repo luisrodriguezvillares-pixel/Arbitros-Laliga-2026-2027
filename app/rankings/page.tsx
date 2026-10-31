@@ -112,11 +112,11 @@ function calcularNota(valoracion: ValoracionDB) {
     (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
     (c.ventaja_bien_aplicada ?? 0) * 0.25 -
     (c.ventaja_mal_aplicada ?? 0) * 0.25 +
-    (c.saque_puerta_correcto ?? 0) * 0.10 -
+    (c.saque_puerta_correcto ?? 0) * 0.05 -
     (c.saque_puerta_incorrecto ?? 0) * 0.20 +
-    (c.corner_correcto ?? 0) * 0.10 -
+    (c.corner_correcto ?? 0) * 0.05 -
     (c.corner_incorrecto ?? 0) * 0.20 +
-    (c.saque_banda_correcto ?? 0) * 0.10 -
+    (c.saque_banda_correcto ?? 0) * 0.05 -
     (c.saque_banda_incorrecto ?? 0) * 0.20 +
     (c.fuera_juego_correcto ?? 0) * 0.10 -
     (c.fuera_juego_incorrecto ?? 0) * 0.20 +

@@ -136,13 +136,13 @@ const notaCalculada =
   (criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
 
   // BALÓN PARADO
-  (criterios.saque_puerta_correcto ?? 0) * 0.10 -
+  (criterios.saque_puerta_correcto ?? 0) * 0.05 -
   (criterios.saque_puerta_incorrecto ?? 0) * 0.20 +
 
-  (criterios.corner_correcto ?? 0) * 0.10 -
+  (criterios.corner_correcto ?? 0) * 0.05 -
   (criterios.corner_incorrecto ?? 0) * 0.20 +
 
-  (criterios.saque_banda_correcto ?? 0) * 0.10 -
+  (criterios.saque_banda_correcto ?? 0) * 0.05 -
   (criterios.saque_banda_incorrecto ?? 0) * 0.20 +
    (criterios.fuera_juego_correcto ?? 0) * 0.10 -
    (criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
@@ -384,13 +384,13 @@ useEffect(() => {
             (data.criterios.ventaja_bien_aplicada ?? 0) * 0.25 -
             (data.criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
 
-            (data.criterios.saque_puerta_correcto ?? 0) * 0.10 -
+            (data.criterios.saque_puerta_correcto ?? 0) * 0.05 -
             (data.criterios.saque_puerta_incorrecto ?? 0) * 0.20 +
 
-            (data.criterios.corner_correcto ?? 0) * 0.10 -
+            (data.criterios.corner_correcto ?? 0) * 0.05 -
             (data.criterios.corner_incorrecto ?? 0) * 0.20 +
 
-            (data.criterios.saque_banda_correcto ?? 0) * 0.10 -
+            (data.criterios.saque_banda_correcto ?? 0) * 0.05 -
             (data.criterios.saque_banda_incorrecto ?? 0) * 0.20 +
    (data.criterios.fuera_juego_correcto ?? 0) * 0.10 -
    (data.criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
@@ -480,13 +480,13 @@ const notaOtro =
             (c.ventaja_bien_aplicada ?? 0) * 0.25 -
             (c.ventaja_mal_aplicada ?? 0) * 0.25 +
 
-            (c.saque_puerta_correcto ?? 0) * 0.10 -
+            (c.saque_puerta_correcto ?? 0) * 0.05 -
             (c.saque_puerta_incorrecto ?? 0) * 0.20 +
 
-            (c.corner_correcto ?? 0) * 0.10 -
+            (c.corner_correcto ?? 0) * 0.05 -
             (c.corner_incorrecto ?? 0) * 0.20 +
 
-            (c.saque_banda_correcto ?? 0) * 0.10 -
+            (c.saque_banda_correcto ?? 0) * 0.05 -
             (c.saque_banda_incorrecto ?? 0) * 0.20 +
    (c.fuera_juego_correcto ?? 0) * 0.10 -
    (c.fuera_juego_incorrecto ?? 0) * 0.20 +
@@ -1461,7 +1461,7 @@ valorador_nombre:
   ["Penalti", "+1,25", "−1,25"],
   ["Falta", "+0,25", "−0,25"],
   ["Ventaja", "+0,25", "−0,25"],
-  ["Saque de puerta / córner / saque de banda", "+0,15", "−0,15"],
+  ["Saque de puerta / córner / saque de banda", "+0,05", "−0,20"],
   ["Tiempo añadido", "+0,25", "−0,25"],
 ].map(([accion, acierto, error]) => (
       <div
