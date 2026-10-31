@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { matches } from "../data/matches";
 import { teams } from "../data/teams";
 import { getRefereeById } from "../data/referees";
@@ -49,6 +49,7 @@ const valoradores = [
 
 function ValoracionesContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
 const [perfil, setPerfil] = useState<Perfil | null>(null);
 const [sesionComprobada, setSesionComprobada] = useState(false);
@@ -232,6 +233,7 @@ async function eliminarValoracionActual() {
   setEstado("borrador");
   setDatosCargados(true);
   setEstadoGuardado("Valoración eliminada ✓");
+  router.replace(`/partidos/${encodeURIComponent(match.id)}`);
 }
 
 const homeTeam = match
