@@ -1341,16 +1341,27 @@ valorador_nombre:
   "accion-valor"
 ) as HTMLInputElement;
 
-        if (!accionInput.value.trim()) return;
+        const minuto = minutoInput.value.trim();
+        const accion = accionInput.value.trim();
+        const valorTexto = valorInput.value.trim();
+        const valor = Number(valorTexto.replace(",", "."));
+
+        if (!minuto || !accion || !valorTexto ||
+            !Number.isFinite(valor) || valor < 0) {
+          window.alert("Introduce minuto, acción y valor válido.");
+          return;
+        }
 
         setAccionesRelevantes((actual) => [
           ...actual,
           {
-  minuto: minutoInput.value,
-  accion: accionInput.value,
-  valor: Number(valorInput.value || 0),
-  decision: decisionInput.value as "correcta" | "incorrecta",
-},
+            minuto,
+            accion,
+            valor: Math.abs(valor),
+            decision: decisionInput.value === "incorrecta"
+              ? "incorrecta"
+              : "correcta",
+          },
         ]);
 
         minutoInput.value = "";
