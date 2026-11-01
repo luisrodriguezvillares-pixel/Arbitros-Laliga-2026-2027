@@ -753,71 +753,99 @@ valorador_nombre:
   </div>
 
 {verOtraCompleta && otraValoracion && (
-  <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-    {Object.entries(otraValoracion.criterios).map(([key, valor]) => (
-      <div
-        key={key}
-        className="rounded-xl border border-white/10 bg-black/20 px-4 py-3"
-      >
-        <p className="text-xs font-black uppercase tracking-[0.12em] text-slate-400">
-          {key.replaceAll("_", " ")}
-        </p>
+  <div className="mt-6 space-y-5">
 
-        <p className="mt-1 text-xl font-black text-white">
-          {valor}
-        </p>
-      </div>
-    ))}
-
-{otraValoracion.decisiones_clave.length > 0 && (
-  <div className="sm:col-span-2 lg:col-span-3 rounded-2xl border border-white/10 bg-black/20 p-4">
-    <p className="text-xs font-black uppercase tracking-[0.12em] text-slate-400">
-      Acciones relevantes
-    </p>
-
-    <div className="mt-3 grid gap-2">
-      {otraValoracion.decisiones_clave.map((item, index) => (
-        <div
-          key={`${item.minuto}-${index}`}
-          className="grid gap-2 rounded-xl bg-white/5 px-3 py-3 sm:grid-cols-[80px_1fr_100px]"
-        >
-          <span className="font-black text-amber-300">
-            {item.minuto || "—"}
-          </span>
-
-          <span className="font-bold text-white">
-            {item.accion}
-          </span>
-
-          <span
-            className={`font-black ${
-              item.valor > 0
-                ? "text-emerald-300"
-                : item.valor < 0
-                ? "text-red-300"
-                : "text-slate-300"
-            }`}
-          >
-            {item.valor > 0 ? "+" : ""}
-            {item.valor.toFixed(2)}
-          </span>
-        </div>
-      ))}
+    <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5">
+      <h3 className="text-xl font-black text-white">
+        Valoración completa de {otraValoracion.valorador_nombre || "el otro valorador"}
+      </h3>
+      <p className="mt-2 text-sm text-slate-300">
+        Consulta de todos los datos registrados. Solo lectura.
+      </p>
+      <p className="mt-3 text-2xl font-black text-emerald-300">
+        Nota: {otraValoracion.nota_final == null
+          ? "Sin nota"
+          : Number(otraValoracion.nota_final).toFixed(2) + " / 10"}
+      </p>
     </div>
-  </div>
-)}
 
-    {otraValoracion.comentario && (
-      <div className="sm:col-span-2 lg:col-span-3 rounded-2xl border border-white/10 bg-black/20 p-4">
-        <p className="text-xs font-black uppercase tracking-[0.12em] text-slate-400">
-          Comentario
-        </p>
+    <div>
+      <h4 className="mb-3 text-lg font-black text-white">
+        Criterios de valoración
+      </h4>
 
-        <p className="mt-2 text-slate-200">
-          {otraValoracion.comentario}
-        </p>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {Object.entries(otraValoracion.criterios).map(([clave, valor]) => (
+          <div
+            key={clave}
+            className="rounded-xl border border-white/10 bg-black/20 p-4"
+          >
+            <p className="text-sm font-bold text-slate-300">
+              {clave.replaceAll("_", " ")}
+            </p>
+            <p className="mt-2 text-xl font-black text-white">
+              {typeof valor === "object"
+                ? JSON.stringify(valor)
+                : String(valor ?? "—")}
+            </p>
+          </div>
+        ))}
       </div>
-    )}
+    </div>
+
+    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+      <h4 className="text-lg font-black text-white">
+        Acciones relevantes
+      </h4>
+
+      {otraValoracion.decisiones_clave.length === 0 ? (
+        <p className="mt-3 text-slate-400">
+          No hay acciones relevantes registradas.
+        </p>
+      ) : (
+        <div className="mt-4 space-y-3">
+          {otraValoracion.decisiones_clave.map((item, index) => (
+            <div
+              key={index}
+              className="rounded-xl border border-white/10 bg-white/5 p-4"
+            >
+              <p className="font-black text-amber-300">
+                Minuto: {item.minuto || "—"}
+              </p>
+
+              <p className="mt-2 font-bold text-white">
+                {item.accion || "Acción sin descripción"}
+              </p>
+
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {Object.entries(item).map(([campo, valor]) => (
+                  <div key={campo} className="rounded-lg bg-black/20 p-3">
+                    <p className="text-xs font-bold uppercase text-slate-400">
+                      {campo.replaceAll("_", " ")}
+                    </p>
+                    <p className="mt-1 break-words font-bold text-white">
+                      {typeof valor === "object"
+                        ? JSON.stringify(valor)
+                        : String(valor ?? "—")}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+      <h4 className="text-lg font-black text-white">
+        Comentario del valorador
+      </h4>
+      <p className="mt-3 whitespace-pre-wrap text-slate-200">
+        {otraValoracion.comentario || "Sin comentarios registrados."}
+      </p>
+    </div>
+
   </div>
 )}
 </section>
