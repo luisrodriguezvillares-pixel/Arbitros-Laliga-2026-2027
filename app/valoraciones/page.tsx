@@ -127,8 +127,8 @@ const notaCalculada =
   (criterios.penalti_incorrecto ?? 0) * 1.25 +
 
   // FALTAS Y VENTAJAS
-  (criterios.falta_correcta ?? 0) * 0.25 -
-  (criterios.falta_incorrecta ?? 0) * 0.25 +
+  (criterios.falta_correcta ?? 0) * 0.20 -
+  (criterios.falta_incorrecta ?? 0) * 0.20 +
   (criterios.falta_peligrosa_correcta ?? 0) * 0.5 -
   (criterios.falta_peligrosa_incorrecta ?? 0) * 0.5 +
 
@@ -144,7 +144,7 @@ const notaCalculada =
 
   (criterios.saque_banda_correcto ?? 0) * 0.05 -
   (criterios.saque_banda_incorrecto ?? 0) * 0.20 +
-   (criterios.fuera_juego_correcto ?? 0) * 0.10 -
+   (criterios.fuera_juego_correcto ?? 0) * 0.05 -
    (criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
 
   // TIEMPO AÑADIDO
@@ -376,8 +376,8 @@ useEffect(() => {
             (data.criterios.penalti_correcto ?? 0) * 1.25 -
             (data.criterios.penalti_incorrecto ?? 0) * 1.25 +
 
-            (data.criterios.falta_correcta ?? 0) * 0.25 -
-            (data.criterios.falta_incorrecta ?? 0) * 0.25 +
+            (data.criterios.falta_correcta ?? 0) * 0.20 -
+            (data.criterios.falta_incorrecta ?? 0) * 0.20 +
              (data.criterios.falta_peligrosa_correcta ?? 0) * 0.5 -
              (data.criterios.falta_peligrosa_incorrecta ?? 0) * 0.5 +
 
@@ -392,7 +392,7 @@ useEffect(() => {
 
             (data.criterios.saque_banda_correcto ?? 0) * 0.05 -
             (data.criterios.saque_banda_incorrecto ?? 0) * 0.20 +
-   (data.criterios.fuera_juego_correcto ?? 0) * 0.10 -
+   (data.criterios.fuera_juego_correcto ?? 0) * 0.05 -
    (data.criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
 
             (data.criterios.anadido_correcto ?? 0) * 0.25 -
@@ -472,8 +472,8 @@ const notaOtro =
             (c.penalti_correcto ?? 0) * 1.25 -
             (c.penalti_incorrecto ?? 0) * 1.25 +
 
-            (c.falta_correcta ?? 0) * 0.25 -
-            (c.falta_incorrecta ?? 0) * 0.25 +
+            (c.falta_correcta ?? 0) * 0.20 -
+            (c.falta_incorrecta ?? 0) * 0.20 +
              (c.falta_peligrosa_correcta ?? 0) * 0.5 -
              (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
 
@@ -488,7 +488,7 @@ const notaOtro =
 
             (c.saque_banda_correcto ?? 0) * 0.05 -
             (c.saque_banda_incorrecto ?? 0) * 0.20 +
-   (c.fuera_juego_correcto ?? 0) * 0.10 -
+   (c.fuera_juego_correcto ?? 0) * 0.05 -
    (c.fuera_juego_incorrecto ?? 0) * 0.20 +
 
             (c.anadido_correcto ?? 0) * 0.25 -
@@ -1459,7 +1459,7 @@ valorador_nombre:
   ["Tarjeta amarilla", "+0,75", "−0,75"],
   ["Tarjeta roja", "+1,50", "−1,50"],
   ["Penalti", "+1,25", "−1,25"],
-  ["Falta", "+0,25", "−0,25"],
+  ["Falta", "+0,20", "−0,20"],
   ["Ventaja", "+0,25", "−0,25"],
   ["Saque de puerta / córner / saque de banda", "+0,05", "−0,20"],
   ["Tiempo añadido", "+0,25", "−0,25"],

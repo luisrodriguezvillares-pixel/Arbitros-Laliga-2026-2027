@@ -106,8 +106,8 @@ function calcularNota(valoracion: ValoracionDB) {
     (c.roja_incorrecta ?? 0) * 1.5 +
     (c.penalti_correcto ?? 0) * 1.25 -
     (c.penalti_incorrecto ?? 0) * 1.25 +
-    (c.falta_correcta ?? 0) * 0.25 -
-    (c.falta_incorrecta ?? 0) * 0.25 +
+    (c.falta_correcta ?? 0) * 0.20 -
+    (c.falta_incorrecta ?? 0) * 0.20 +
     (c.falta_peligrosa_correcta ?? 0) * 0.5 -
     (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
     (c.ventaja_bien_aplicada ?? 0) * 0.25 -
@@ -118,7 +118,7 @@ function calcularNota(valoracion: ValoracionDB) {
     (c.corner_incorrecto ?? 0) * 0.20 +
     (c.saque_banda_correcto ?? 0) * 0.05 -
     (c.saque_banda_incorrecto ?? 0) * 0.20 +
-    (c.fuera_juego_correcto ?? 0) * 0.10 -
+    (c.fuera_juego_correcto ?? 0) * 0.05 -
     (c.fuera_juego_incorrecto ?? 0) * 0.20 +
     (c.buena_intervencion_var ?? 0) * 0.25 -
     (c.mala_intervencion_var ?? 0) * 0.25 +
