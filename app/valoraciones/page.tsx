@@ -204,6 +204,7 @@ const [acciones, setAcciones] = useState<
 } | null>(null);
 
 const [verOtraCompleta, setVerOtraCompleta] = useState(false);
+const [colorValoracion, setColorValoracion] = useState("");
 async function eliminarValoracionActual() {
   if (!match || !valoradorSeleccionado) return;
 
@@ -228,6 +229,7 @@ async function eliminarValoracionActual() {
   }
 
   setCriterios({});
+  setColorValoracion("");
   setComentario("");
   setAccionesRelevantes([]);
   setEstado("borrador");
@@ -304,11 +306,13 @@ useEffect(() => {
 
     if (data) {
       setCriterios(data.criterios ?? {});
+      setColorValoracion(data.criterios?.color_valoracion ?? "");
       setComentario(data.comentario ?? "");
 setAccionesRelevantes(data.decisiones_clave ?? []);
 setEstado(data.estado ?? "borrador");
     } else {
   setCriterios({});
+  setColorValoracion("");
   setComentario("");
   setAccionesRelevantes([]);
   setEstado("borrador");
@@ -539,7 +543,7 @@ valorador_nombre:
           var_referee_id: varRefereeId,
           estado: estado,
           nota_final: notaFinal,
-          criterios: criterios,
+          criterios: { ...criterios, color_valoracion: colorValoracion },
           decisiones_clave: accionesRelevantes,
           comentario: comentario,
           updated_at: new Date().toISOString(),
@@ -562,6 +566,7 @@ valorador_nombre:
 }, [
   match,
   criterios,
+  colorValoracion,
   comentario,
   estado,
   accionesRelevantes,
@@ -1293,7 +1298,8 @@ valorador_nombre:
 
           <select
             id="color-valoracion"
-            defaultValue=""
+            value={colorValoracion}
+            onChange={(e) => setColorValoracion(e.target.value)}
             className="w-full rounded-2xl border border-white/10 bg-slate-900 px-4 py-3 font-bold text-white outline-none sm:max-w-xs"
           >
             <option value="" disabled>Seleccionar color</option>
