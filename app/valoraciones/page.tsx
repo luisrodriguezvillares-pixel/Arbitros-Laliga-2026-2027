@@ -1281,6 +1281,30 @@ valorador_nombre:
 </div>
         </section>
 
+
+        {/* COLOR */}
+        <section className="mb-8 rounded-[28px] border border-white/10 bg-white/5 p-6">
+          <label
+            htmlFor="color-valoracion"
+            className="mb-3 block text-lg font-black text-white"
+          >
+            Color
+          </label>
+
+          <select
+            id="color-valoracion"
+            defaultValue=""
+            className="w-full rounded-2xl border border-white/10 bg-slate-900 px-4 py-3 font-bold text-white outline-none sm:max-w-xs"
+          >
+            <option value="" disabled>Seleccionar color</option>
+            <option value="amarillo">Amarillo</option>
+            <option value="azul">Azul</option>
+            <option value="negro">Negro</option>
+            <option value="rojo">Rojo</option>
+            <option value="turquesa">Turquesa</option>
+          </select>
+        </section>
+
         {/* DECISIONES CLAVE */}
         <section className="mt-10">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-300">
