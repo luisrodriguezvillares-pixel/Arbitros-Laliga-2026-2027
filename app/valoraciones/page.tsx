@@ -7,6 +7,7 @@ import { teams } from "../data/teams";
 import { getRefereeById } from "../data/referees";
 import { Suspense, useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import { calcularNotaArbitral } from "../../lib/notaArbitral";
 
 const teamSlugByMatchName: Record<string, string> = {
   "Deportivo Alavés": "deportivo-alaves",
@@ -106,51 +107,6 @@ const [datosCargados, setDatosCargados] = useState(false);
 
   const [criterios, setCriterios] = useState<Record<string, number>>({});
 
-const notaBase = 6;
-
-const notaCalculada =
-  notaBase +
-
-  // CONTROL Y COLOCACIÓN
-  (criterios.control ?? 0) +
-  (criterios.colocacion ?? 0) +
-
-  // TARJETAS
-  (criterios.amarilla_correcta ?? 0) * 0.75 -
-  (criterios.amarilla_incorrecta ?? 0) * 0.75 +
-
-  (criterios.roja_correcta ?? 0) * 1.5 -
-  (criterios.roja_incorrecta ?? 0) * 1.5 +
-
-  // PENALTIS
-  (criterios.penalti_correcto ?? 0) * 1.25 -
-  (criterios.penalti_incorrecto ?? 0) * 1.25 +
-
-  // FALTAS Y VENTAJAS
-  (criterios.falta_correcta ?? 0) * 0.20 -
-  (criterios.falta_incorrecta ?? 0) * 0.20 +
-  (criterios.falta_peligrosa_correcta ?? 0) * 0.5 -
-  (criterios.falta_peligrosa_incorrecta ?? 0) * 0.5 +
-
-  (criterios.ventaja_bien_aplicada ?? 0) * 0.25 -
-  (criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
-
-  // BALÓN PARADO
-  (criterios.saque_puerta_correcto ?? 0) * 0.05 -
-  (criterios.saque_puerta_incorrecto ?? 0) * 0.20 +
-
-  (criterios.corner_correcto ?? 0) * 0.05 -
-  (criterios.corner_incorrecto ?? 0) * 0.20 +
-
-  (criterios.saque_banda_correcto ?? 0) * 0.05 -
-  (criterios.saque_banda_incorrecto ?? 0) * 0.20 +
-   (criterios.fuera_juego_correcto ?? 0) * 0.05 -
-   (criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
-
-  // TIEMPO AÑADIDO
-  (criterios.anadido_correcto ?? 0) * 0.25 -
-  (criterios.anadido_incorrecto ?? 0) * 0.25;
-
   const [comentario, setComentario] = useState("");
   const [accionesRelevantes, setAccionesRelevantes] = useState<
   {
@@ -160,15 +116,7 @@ const notaCalculada =
     decision: "correcta" | "incorrecta";
   }[]
 >([]);
-const valorAccionesRelevantes = accionesRelevantes.reduce(
-  (total, accion) => total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
-  0
-);
-
-const notaEnDirecto = Math.max(
-  0,
-  Math.min(10, notaCalculada + valorAccionesRelevantes)
-).toFixed(2);
+const notaEnDirecto = calcularNotaArbitral(criterios, accionesRelevantes).toFixed(2);
 
   const [estado, setEstado] =
     useState<"borrador" | "directo">("borrador");
@@ -361,55 +309,17 @@ useEffect(() => {
             criterios: data.criterios ?? {},
             comentario: data.comentario ?? "",
             decisiones_clave: data.decisiones_clave ?? [],
-            nota_final:
-  data.criterios && Object.keys(data.criterios).length > 0
-    ? Math.max(
-        0,
-        Math.min(
-          10,
-          6 +
-            (data.criterios.control ?? 0) +
-            (data.criterios.colocacion ?? 0) +
-
-            (data.criterios.amarilla_correcta ?? 0) * 0.75 -
-            (data.criterios.amarilla_incorrecta ?? 0) * 0.75 +
-
-            (data.criterios.roja_correcta ?? 0) * 1.5 -
-            (data.criterios.roja_incorrecta ?? 0) * 1.5 +
-
-            (data.criterios.penalti_correcto ?? 0) * 1.25 -
-            (data.criterios.penalti_incorrecto ?? 0) * 1.25 +
-
-            (data.criterios.falta_correcta ?? 0) * 0.20 -
-            (data.criterios.falta_incorrecta ?? 0) * 0.20 +
-             (data.criterios.falta_peligrosa_correcta ?? 0) * 0.5 -
-             (data.criterios.falta_peligrosa_incorrecta ?? 0) * 0.5 +
-
-            (data.criterios.ventaja_bien_aplicada ?? 0) * 0.25 -
-            (data.criterios.ventaja_mal_aplicada ?? 0) * 0.25 +
-
-            (data.criterios.saque_puerta_correcto ?? 0) * 0.05 -
-            (data.criterios.saque_puerta_incorrecto ?? 0) * 0.20 +
-
-            (data.criterios.corner_correcto ?? 0) * 0.05 -
-            (data.criterios.corner_incorrecto ?? 0) * 0.20 +
-
-            (data.criterios.saque_banda_correcto ?? 0) * 0.05 -
-            (data.criterios.saque_banda_incorrecto ?? 0) * 0.20 +
-   (data.criterios.fuera_juego_correcto ?? 0) * 0.05 -
-   (data.criterios.fuera_juego_incorrecto ?? 0) * 0.20 +
-
-            (data.criterios.anadido_correcto ?? 0) * 0.25 -
-            (data.criterios.anadido_incorrecto ?? 0) * 0.25 +
-
-            (data.decisiones_clave ?? []).reduce(
-              (total: number, accion: { valor?: number; decision?: "correcta" | "incorrecta" }) =>
-                total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
-              0
+            nota_final: (
+              Object.keys(data.criterios ?? {}).some(
+                k => k !== "color_valoracion"
+              ) ||
+              (data.decisiones_clave ?? []).length > 0
             )
-        )
-      )
-    : null,
+              ? calcularNotaArbitral(
+                  data.criterios,
+                  data.decisiones_clave
+                )
+              : null,
           }
         : null
     );
@@ -457,55 +367,17 @@ useEffect(() => {
 
         const c = nueva.criterios ?? {};
 
-const notaOtro =
-  Object.keys(c).length > 0
-    ? Math.max(
-        0,
-        Math.min(
-          10,
-          6 +
-            (c.control ?? 0) +
-            (c.colocacion ?? 0) +
-
-            (c.amarilla_correcta ?? 0) * 0.75 -
-            (c.amarilla_incorrecta ?? 0) * 0.75 +
-
-            (c.roja_correcta ?? 0) * 1.5 -
-            (c.roja_incorrecta ?? 0) * 1.5 +
-
-            (c.penalti_correcto ?? 0) * 1.25 -
-            (c.penalti_incorrecto ?? 0) * 1.25 +
-
-            (c.falta_correcta ?? 0) * 0.20 -
-            (c.falta_incorrecta ?? 0) * 0.20 +
-             (c.falta_peligrosa_correcta ?? 0) * 0.5 -
-             (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
-
-            (c.ventaja_bien_aplicada ?? 0) * 0.25 -
-            (c.ventaja_mal_aplicada ?? 0) * 0.25 +
-
-            (c.saque_puerta_correcto ?? 0) * 0.05 -
-            (c.saque_puerta_incorrecto ?? 0) * 0.20 +
-
-            (c.corner_correcto ?? 0) * 0.05 -
-            (c.corner_incorrecto ?? 0) * 0.20 +
-
-            (c.saque_banda_correcto ?? 0) * 0.05 -
-            (c.saque_banda_incorrecto ?? 0) * 0.20 +
-   (c.fuera_juego_correcto ?? 0) * 0.05 -
-   (c.fuera_juego_incorrecto ?? 0) * 0.20 +
-
-            (c.anadido_correcto ?? 0) * 0.25 -
-            (c.anadido_incorrecto ?? 0) * 0.25 +
-
-            (nueva.decisiones_clave ?? []).reduce(
-              (total: number, accion: { valor?: number; decision?: "correcta" | "incorrecta" }) =>
-                total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
-              0
-            )
+const notaOtro = (
+          Object.keys(c).some(
+            k => k !== "color_valoracion"
+          ) ||
+          (nueva.decisiones_clave ?? []).length > 0
         )
-      )
-    : null;
+          ? calcularNotaArbitral(
+              c,
+              nueva.decisiones_clave
+            )
+          : null;
 setOtraValoracion({
   valorador_nombre: nueva.valorador_nombre ?? null,
   criterios: c,
@@ -1516,10 +1388,12 @@ valorador_nombre:
   ["Colocación", "−0,50 a +0,50", "11 opciones"],
   ["Tarjeta amarilla", "+0,75", "−0,75"],
   ["Tarjeta roja", "+1,50", "−1,50"],
-  ["Penalti", "+1,25", "−1,25"],
-  ["Falta", "+0,20", "−0,20"],
+  ["Penalti", "+1,50", "−1,50"],
+  ["Falta", "+0,20", "−0,50"],
+   ["Falta peligrosa", "+0,50", "−0,50"],
   ["Ventaja", "+0,25", "−0,25"],
-  ["Saque de puerta / córner / saque de banda", "+0,05", "−0,20"],
+  ["Saque de puerta / córner / saque de banda", "+0,02", "−0,20"],
+   ["Fuera de juego", "+0,02", "−0,20"],
   ["Tiempo añadido", "+0,25", "−0,25"],
 ].map(([accion, acierto, error]) => (
       <div

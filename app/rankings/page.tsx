@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import { calcularNotaArbitral } from "../../lib/notaArbitral";
 import { referees } from "../data/referees";
 import { matches } from "../data/matches";
 
@@ -78,62 +79,11 @@ const nombresValoradores: Record<Vista, string> = {
   "rodrigo-hilla-blanc": "Rodrigo Hilla Blanc",
 };
 
-function limitarNota(nota: number) {
-  return Math.max(0, Math.min(10, nota));
-}
-
-/*
-  IMPORTANTE:
-  La clasificación NO depende del nota_final antiguo que pueda existir
-  en Supabase.
-
-  Recalculamos la nota a partir de los criterios guardados.
-  Así, aunque una valoración antigua tuviera una fórmula anterior,
-  Rankings utiliza siempre la fórmula actual.
-*/
 function calcularNota(valoracion: ValoracionDB) {
-  const c = valoracion.criterios ?? {};
-
-  let nota =
-    6 +
-    (c.control ?? 0) +
-    (c.colocacion ?? 0) +
-    (c.buen_control ?? 0) * 0.3 -
-    (c.mal_control ?? 0) * 0.3 +
-    (c.amarilla_correcta ?? 0) * 0.75 -
-    (c.amarilla_incorrecta ?? 0) * 0.75 +
-    (c.roja_correcta ?? 0) * 1.5 -
-    (c.roja_incorrecta ?? 0) * 1.5 +
-    (c.penalti_correcto ?? 0) * 1.25 -
-    (c.penalti_incorrecto ?? 0) * 1.25 +
-    (c.falta_correcta ?? 0) * 0.20 -
-    (c.falta_incorrecta ?? 0) * 0.20 +
-    (c.falta_peligrosa_correcta ?? 0) * 0.5 -
-    (c.falta_peligrosa_incorrecta ?? 0) * 0.5 +
-    (c.ventaja_bien_aplicada ?? 0) * 0.25 -
-    (c.ventaja_mal_aplicada ?? 0) * 0.25 +
-    (c.saque_puerta_correcto ?? 0) * 0.05 -
-    (c.saque_puerta_incorrecto ?? 0) * 0.20 +
-    (c.corner_correcto ?? 0) * 0.05 -
-    (c.corner_incorrecto ?? 0) * 0.20 +
-    (c.saque_banda_correcto ?? 0) * 0.05 -
-    (c.saque_banda_incorrecto ?? 0) * 0.20 +
-    (c.fuera_juego_correcto ?? 0) * 0.05 -
-    (c.fuera_juego_incorrecto ?? 0) * 0.20 +
-    (c.buena_intervencion_var ?? 0) * 0.25 -
-    (c.mala_intervencion_var ?? 0) * 0.25 +
-    (c.buena_decision_revision ?? 0) * 0.5 +
-    (c.anadido_correcto ?? 0) * 0.25 -
-    (c.anadido_incorrecto ?? 0) * 0.25;
-
-  const ajusteAcciones = (valoracion.decisiones_clave ?? []).reduce(
-    (total, accion) => total + (accion.decision === "incorrecta" ? -1 : 1) * Math.abs(Number(accion.valor ?? 0)),
-    0
+  return calcularNotaArbitral(
+    valoracion.criterios,
+    valoracion.decisiones_clave
   );
-
-  nota += ajusteAcciones;
-
-  return limitarNota(nota);
 }
 
 function obtenerDatosPartido(matchId: string) {
