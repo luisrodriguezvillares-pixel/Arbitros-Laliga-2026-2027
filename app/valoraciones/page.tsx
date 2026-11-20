@@ -1211,6 +1211,35 @@ valorador_nombre:
           </select>
         </section>
 
+        {/* COMENTARIO GENERAL DEL ARBITRAJE */}
+        <section className="mb-8 rounded-[28px] border border-blue-400/20 bg-white/5 p-6">
+          <label
+            htmlFor="comentario-arbitraje"
+            className="block text-xl font-black text-white"
+          >
+            Comentario sobre el arbitraje
+          </label>
+
+          <p className="mt-3 text-sm leading-6 text-slate-300">
+            Describe cómo ha dirigido el árbitro el partido:
+            su criterio, autoridad, control, comunicación
+            y valoración general.
+          </p>
+
+          <textarea
+            id="comentario-arbitraje"
+            rows={6}
+            value={comentario}
+            onChange={(e) => setComentario(e.target.value)}
+            placeholder="Escribe aquí tu valoración general del arbitraje..."
+            className="mt-5 w-full resize-y rounded-2xl border border-white/15 bg-slate-900 px-5 py-4 text-base leading-7 text-white outline-none focus:border-blue-400"
+          />
+
+          <p className="mt-3 text-sm font-bold text-emerald-300">
+            Se guarda automáticamente y no suma ni resta puntos.
+          </p>
+        </section>
+
         {/* DECISIONES CLAVE */}
         <section className="mt-10">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-300">
