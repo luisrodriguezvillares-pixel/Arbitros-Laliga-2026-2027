@@ -4,6 +4,7 @@
 type AccionRelevante = {
   valor?: number | null;
   decision?: string | null;
+  correccionTrasVAR?: boolean;
 };
 
 export function calcularNotaArbitral(
@@ -160,10 +161,15 @@ export function calcularNotaArbitral(
     maximoGraves - reduccionLeves
   );
 
+  const maximoPorVAR =
+    Number(c["correccion_tras_var"] ?? 0) > 0 ||
+    lista.some((accion) => accion.correccionTrasVAR === true)
+      ? 9 : 10;
+
   // Nota final entre 0 y el máximo permitido.
   const resultado = Math.max(
     0,
-    Math.min(notaBruta, maximoFinal)
+    Math.min(notaBruta, maximoFinal, maximoPorVAR)
   );
 
   return Math.round(resultado * 100) / 100;

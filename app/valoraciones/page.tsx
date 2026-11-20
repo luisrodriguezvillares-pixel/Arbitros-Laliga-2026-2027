@@ -114,6 +114,7 @@ const [datosCargados, setDatosCargados] = useState(false);
     accion: string;
     valor: number;
     decision: "correcta" | "incorrecta";
+    correccionTrasVAR?: boolean;
   }[]
 >([]);
 const notaEnDirecto = calcularNotaArbitral(criterios, accionesRelevantes).toFixed(2);
@@ -1211,34 +1212,7 @@ valorador_nombre:
           </select>
         </section>
 
-        {/* COMENTARIO GENERAL DEL ARBITRAJE */}
-        <section className="mb-8 rounded-[28px] border border-blue-400/20 bg-white/5 p-6">
-          <label
-            htmlFor="comentario-arbitraje"
-            className="block text-xl font-black text-white"
-          >
-            Comentario sobre el arbitraje
-          </label>
-
-          <p className="mt-3 text-sm leading-6 text-slate-300">
-            Describe cómo ha dirigido el árbitro el partido:
-            su criterio, autoridad, control, comunicación
-            y valoración general.
-          </p>
-
-          <textarea
-            id="comentario-arbitraje"
-            rows={6}
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-            placeholder="Escribe aquí tu valoración general del arbitraje..."
-            className="mt-5 w-full resize-y rounded-2xl border border-white/15 bg-slate-900 px-5 py-4 text-base leading-7 text-white outline-none focus:border-blue-400"
-          />
-
-          <p className="mt-3 text-sm font-bold text-emerald-300">
-            Se guarda automáticamente y no suma ni resta puntos.
-          </p>
-        </section>
+        
 
         {/* DECISIONES CLAVE */}
         <section className="mt-10">
@@ -1249,6 +1223,14 @@ valorador_nombre:
           <h2 className="mt-2 text-3xl font-black">
             Acciones relevantes
           </h2>
+          <label className="mt-5 mb-3 flex items-center gap-3 rounded-2xl border border-amber-400/30 bg-amber-500/10 p-4 font-bold text-white">
+            <input
+              id="accion-cambio-var"
+              type="checkbox"
+              className="h-5 w-5 accent-amber-400"
+            />
+            El árbitro cambió su decisión después de revisar el VAR (máximo 9)
+          </label>
 
           <div className="mt-6 rounded-[28px] border border-white/10 bg-white/5 p-6">
   <div className="grid gap-4 md:grid-cols-[110px_1fr_150px_160px_auto]">
@@ -1306,6 +1288,11 @@ valorador_nombre:
         const accion = accionInput.value.trim();
         const valorTexto = valorInput.value.trim();
         const valor = Number(valorTexto.replace(",", "."));
+        const marcaVAR = document.getElementById(
+          "accion-cambio-var"
+        ) as HTMLInputElement | null;
+
+        const corregidaTrasVAR = marcaVAR?.checked === true;
 
         if (!minuto || !accion || !valorTexto ||
             !Number.isFinite(valor) || valor < 0) {
@@ -1322,12 +1309,14 @@ valorador_nombre:
             decision: decisionInput.value === "incorrecta"
               ? "incorrecta"
               : "correcta",
+            correccionTrasVAR: corregidaTrasVAR,
           },
         ]);
 
         minutoInput.value = "";
         accionInput.value = "";
         valorInput.value = "";
+        if (marcaVAR) marcaVAR.checked = false;
       }}
       className="rounded-2xl bg-blue-600 px-6 py-3 font-black text-white shadow-lg transition hover:bg-blue-500"
     >
@@ -1357,6 +1346,7 @@ valorador_nombre:
             title={item.accion}
           >
             {item.accion}
+              {item.correccionTrasVAR ? " · VAR: decisión corregida" : ""}
           </p>
 
           <p
@@ -1401,6 +1391,35 @@ valorador_nombre:
 </div>
         </section>
       
+{/* COMENTARIO GENERAL DEL ARBITRAJE */}
+        <section className="mb-8 rounded-[28px] border border-blue-400/20 bg-white/5 p-6">
+          <label
+            htmlFor="comentario-arbitraje"
+            className="block text-xl font-black text-white"
+          >
+            Comentario sobre el arbitraje
+          </label>
+
+          <p className="mt-3 text-sm leading-6 text-slate-300">
+            Describe cómo ha dirigido el árbitro el partido:
+            su criterio, autoridad, control, comunicación
+            y valoración general.
+          </p>
+
+          <textarea
+            id="comentario-arbitraje"
+            rows={6}
+            value={comentario}
+            onChange={(e) => setComentario(e.target.value)}
+            placeholder="Escribe aquí tu valoración general del arbitraje..."
+            className="mt-5 w-full resize-y rounded-2xl border border-white/15 bg-slate-900 px-5 py-4 text-base leading-7 text-white outline-none focus:border-blue-400"
+          />
+
+          <p className="mt-3 text-sm font-bold text-emerald-300">
+            Se guarda automáticamente y no suma ni resta puntos.
+          </p>
+        </section>
+
       {/* LEYENDA DE EVALUACIÓN */}
 <section className="mt-10 rounded-[32px] border border-white/10 bg-black/30 p-6">
   <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-300">
