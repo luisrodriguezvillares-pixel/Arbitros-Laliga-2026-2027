@@ -1229,7 +1229,7 @@ valorador_nombre:
               type="checkbox"
               className="h-5 w-5 accent-amber-400"
             />
-            El árbitro cambió su decisión después de revisar el VAR (máximo 9)
+            El árbitro cambió su decisión después de revisar el VAR
           </label>
 
           <div className="mt-6 rounded-[28px] border border-white/10 bg-white/5 p-6">
