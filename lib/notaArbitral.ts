@@ -161,15 +161,15 @@ export function calcularNotaArbitral(
     maximoGraves - reduccionLeves
   );
 
-  const maximoPorVAR =
+  const penalizacionVAR =
     Number(c["correccion_tras_var"] ?? 0) > 0 ||
     lista.some((accion) => accion.correccionTrasVAR === true)
-      ? 9 : 10;
+      ? 1 : 0;
 
   // Nota final entre 0 y el máximo permitido.
   const resultado = Math.max(
     0,
-    Math.min(notaBruta, maximoFinal, maximoPorVAR)
+    Math.min(notaBruta, maximoFinal - penalizacionVAR)
   );
 
   return Math.round(resultado * 100) / 100;
