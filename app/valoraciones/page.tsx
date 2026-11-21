@@ -1076,8 +1076,8 @@ valorador_nombre:
 </div>
 
   
-  {/* FALTAS, VENTAJA Y BALÓN PARADO */}
-<div className="rounded-[28px] border-2 border-cyan-400/40 bg-cyan-950/15 p-6">
+  {/* FALTAS Y VENTAJA */}
+<div className="rounded-[28px] border-2 border-cyan-400/45 bg-cyan-950/15 p-6">
   <h3 className="text-lg font-black text-cyan-300">
     Faltas y ventaja
   </h3>
@@ -1110,11 +1110,11 @@ valorador_nombre:
       </div>
     ))}
   </div>
+</div>
 
-  <div className="mt-6 rounded-[22px] border-2 border-teal-400/35 bg-teal-950/15 p-5">
-    <h4 className="font-black text-white">
-      Balón parado
-    </h4>
+  {/* BALÓN PARADO - SECCIÓN INDEPENDIENTE */}
+<div className="rounded-[28px] border-2 border-teal-400/50 bg-teal-950/15 p-6">
+    <h3 className="text-lg font-black text-teal-300">Balón parado</h3>
 
     <p className="mt-1 text-xs font-bold text-slate-400">
       Saque de puerta · Córner · Saque de banda · Fuera de juego
@@ -1184,7 +1184,6 @@ valorador_nombre:
       ))}
     </div>
   </div>
-</div>
 
   {/* TIEMPO AÑADIDO */}
   <div className="rounded-[28px] border-2 border-violet-400/40 bg-violet-950/15 p-6">
