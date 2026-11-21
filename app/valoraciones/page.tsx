@@ -48,6 +48,53 @@ const valoradores = [
   },
 ];
 
+
+function ContadorCompacto({
+  valor,
+  etiqueta,
+  alCambiar,
+}: {
+  valor: number;
+  etiqueta: string;
+  alCambiar: (nuevo: number) => void;
+}) {
+  const cantidad = Number.isFinite(valor)
+    ? Math.max(0, Math.trunc(valor))
+    : 0;
+
+  return (
+    <div className="inline-flex shrink-0 items-center gap-1 rounded-2xl border border-white/10 bg-slate-900/80 p-1">
+      <button
+        type="button"
+        aria-label={`Sumar uno: ${etiqueta}`}
+        title={`Sumar uno: ${etiqueta}`}
+        onClick={() => alCambiar(cantidad + 1)}
+        className="flex h-7 w-7 items-center justify-center rounded-lg border border-emerald-500/25 bg-emerald-500/10 text-sm font-bold text-emerald-400 transition hover:bg-emerald-500/20"
+      >
+        +
+      </button>
+
+      <span
+        className="min-w-[26px] text-center text-sm font-black tabular-nums text-white"
+        aria-label={`${etiqueta}: ${cantidad}`}
+      >
+        {cantidad}
+      </span>
+
+      <button
+        type="button"
+        aria-label={`Restar uno: ${etiqueta}`}
+        title={`Restar uno: ${etiqueta}`}
+        disabled={cantidad === 0}
+        onClick={() => alCambiar(Math.max(0, cantidad - 1))}
+        className="flex h-7 w-7 items-center justify-center rounded-lg border border-red-500/25 bg-red-500/10 text-sm font-bold text-red-400 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-30"
+      >
+        −
+      </button>
+    </div>
+  );
+}
+
 function ValoracionesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -944,17 +991,15 @@ valorador_nombre:
   {label}
 </span>
 
-            <input
-              type="number"
-              min="0"
-              value={criterios[key] ?? 0}
-              onChange={(e) =>
+            <ContadorCompacto
+              valor={criterios[key] ?? 0}
+              etiqueta={label}
+              alCambiar={(nuevo) =>
                 setCriterios((actual) => ({
                   ...actual,
-                  [key]: Number(e.target.value),
+                  [key]: nuevo,
                 }))
               }
-              className="w-20 rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-center font-black"
             />
           </div>
         ))}
@@ -980,17 +1025,15 @@ valorador_nombre:
   {label}
 </span>
 
-            <input
-              type="number"
-              min="0"
-              value={criterios[key] ?? 0}
-              onChange={(e) =>
+            <ContadorCompacto
+              valor={criterios[key] ?? 0}
+              etiqueta={label}
+              alCambiar={(nuevo) =>
                 setCriterios((actual) => ({
                   ...actual,
-                  [key]: Number(e.target.value),
+                  [key]: nuevo,
                 }))
               }
-              className="w-20 rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-center font-black"
             />
           </div>
         ))}
@@ -1017,17 +1060,15 @@ valorador_nombre:
       >
         <span className="font-bold">{label}</span>
 
-        <input
-          type="number"
-          min="0"
-          value={criterios[key] ?? 0}
-          onChange={(e) =>
+        <ContadorCompacto
+          valor={criterios[key] ?? 0}
+          etiqueta={label}
+          alCambiar={(nuevo) =>
             setCriterios((actual) => ({
               ...actual,
-              [key]: Number(e.target.value),
+              [key]: nuevo,
             }))
           }
-          className="w-20 rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-center font-black"
         />
       </div>
     ))}
@@ -1056,17 +1097,15 @@ valorador_nombre:
       >
         <span className="font-bold">{label}</span>
 
-        <input
-          type="number"
-          min="0"
-          value={criterios[key] ?? 0}
-          onChange={(e) =>
+        <ContadorCompacto
+          valor={criterios[key] ?? 0}
+          etiqueta={label}
+          alCambiar={(nuevo) =>
             setCriterios((actual) => ({
               ...actual,
-              [key]: Number(e.target.value),
+              [key]: nuevo,
             }))
           }
-          className="w-20 rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-center font-black"
         />
       </div>
     ))}
@@ -1111,39 +1150,35 @@ valorador_nombre:
           <p className="font-black text-white">{label}</p>
 
           <div className="mt-3 grid gap-3">
-            <label className="flex items-center justify-between gap-3 text-sm font-bold text-emerald-300">
+            <div className="flex items-center justify-between gap-3 text-sm font-bold text-emerald-300">
               Correcto
 
-              <input
-                type="number"
-                min="0"
-                value={criterios[keyCorrecto] ?? 0}
-                onChange={(e) =>
+              <ContadorCompacto
+                valor={criterios[keyCorrecto] ?? 0}
+                etiqueta={`${label}: correcto`}
+                alCambiar={(nuevo) =>
                   setCriterios((actual) => ({
                     ...actual,
-                    [keyCorrecto]: Number(e.target.value),
+                    [keyCorrecto]: nuevo,
                   }))
                 }
-                className="w-16 rounded-xl border border-white/10 bg-slate-900 px-2 py-2 text-center font-black text-white"
               />
-            </label>
+            </div>
 
-            <label className="flex items-center justify-between gap-3 text-sm font-bold text-red-300">
+            <div className="flex items-center justify-between gap-3 text-sm font-bold text-red-300">
               Mal pitado / no pitado
 
-              <input
-                type="number"
-                min="0"
-                value={criterios[keyIncorrecto] ?? 0}
-                onChange={(e) =>
+              <ContadorCompacto
+                valor={criterios[keyIncorrecto] ?? 0}
+                etiqueta={`${label}: incorrecto`}
+                alCambiar={(nuevo) =>
                   setCriterios((actual) => ({
                     ...actual,
-                    [keyIncorrecto]: Number(e.target.value),
+                    [keyIncorrecto]: nuevo,
                   }))
                 }
-                className="w-16 rounded-xl border border-white/10 bg-slate-900 px-2 py-2 text-center font-black text-white"
               />
-            </label>
+            </div>
           </div>
         </div>
       ))}
@@ -1168,17 +1203,15 @@ valorador_nombre:
         >
           <span className="font-bold">{label}</span>
 
-          <input
-            type="number"
-            min="0"
-            value={criterios[key] ?? 0}
-            onChange={(e) =>
+          <ContadorCompacto
+            valor={criterios[key] ?? 0}
+            etiqueta={label}
+            alCambiar={(nuevo) =>
               setCriterios((actual) => ({
                 ...actual,
-                [key]: Number(e.target.value),
+                [key]: nuevo,
               }))
             }
-            className="w-20 rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-center font-black"
           />
         </div>
       ))}
