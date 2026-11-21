@@ -7,7 +7,7 @@ import { teams } from "../data/teams";
 import { getRefereeById } from "../data/referees";
 import { Suspense, useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
-import { calcularNotaArbitral } from "../../lib/notaArbitral";
+import { calcularNotaArbitral, obtenerDetalleArbitral } from "../../lib/notaArbitral";
 
 const teamSlugByMatchName: Record<string, string> = {
   "Deportivo Alavés": "deportivo-alaves",
@@ -118,6 +118,7 @@ const [datosCargados, setDatosCargados] = useState(false);
   }[]
 >([]);
 const notaEnDirecto = calcularNotaArbitral(criterios, accionesRelevantes).toFixed(2);
+const detalleNota = obtenerDetalleArbitral(criterios, accionesRelevantes);
 
   const [estado, setEstado] =
     useState<"borrador" | "directo">("borrador");
@@ -1504,6 +1505,15 @@ valorador_nombre:
   {notaEnDirecto} / 10
 </p>
           </div>
+          <p className="mt-5 text-sm font-bold text-slate-200">
+            Errores graves: {detalleNota.graves} ·
+            Errores leves: {detalleNota.leves} ·
+            Corrección VAR: {detalleNota.correccionVAR ? "Sí" : "No"}
+          </p>
+          <p className="mt-2 text-sm font-bold text-amber-300">
+            Límite resultante: {detalleNota.maximo.toFixed(2)} / 10
+          </p>
+
         </section>
 
       </div>

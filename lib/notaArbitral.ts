@@ -7,6 +7,74 @@ type AccionRelevante = {
   correccionTrasVAR?: boolean;
 };
 
+export function obtenerDetalleArbitral(
+  criterios: Record<string, unknown> | null | undefined,
+  acciones: AccionRelevante[] | null | undefined
+) {
+  const c = criterios ?? {};
+  const lista = Array.isArray(acciones) ? acciones : [];
+
+  const cantidad = (clave: string): number => {
+    const valor = Number(c[clave] ?? 0);
+    return Number.isFinite(valor)
+      ? Math.max(0, Math.trunc(valor))
+      : 0;
+  };
+
+  const graves =
+    cantidad("penalti_incorrecto") +
+    cantidad("roja_incorrecta");
+
+  const clavesLeves = [
+    "amarilla_incorrecta",
+    "falta_incorrecta",
+    "falta_peligrosa_incorrecta",
+    "ventaja_mal_aplicada",
+    "saque_puerta_incorrecto",
+    "corner_incorrecto",
+    "saque_banda_incorrecto",
+    "fuera_juego_incorrecto",
+    "anadido_incorrecto",
+    "mal_control",
+    "mala_intervencion_var"
+  ];
+
+  const leves =
+    clavesLeves.reduce(
+      (suma, clave) => suma + cantidad(clave), 0
+    ) +
+    lista.filter(
+      (accion) => accion.decision === "incorrecta"
+    ).length;
+
+  const correccionVAR =
+    cantidad("correccion_tras_var") > 0 ||
+    lista.some(
+      (accion) => accion.correccionTrasVAR === true
+    );
+
+  const topeGraves =
+    graves === 0 ? 10 :
+    graves === 1 ? 8.5 :
+    graves === 2 ? 7 : 4.5;
+
+  const reduccionLeves = Math.floor(leves / 5) * 0.5;
+  const reduccionVAR = correccionVAR ? 1 : 0;
+
+  const maximo = Math.max(
+    0,
+    topeGraves - reduccionLeves - reduccionVAR
+  );
+
+  return {
+    graves,
+    leves,
+    correccionVAR,
+    maximo
+  };
+}
+
+
 export function calcularNotaArbitral(
   criterios: Record<string, unknown> | null | undefined,
   acciones: AccionRelevante[] | null | undefined
@@ -32,36 +100,7 @@ export function calcularNotaArbitral(
   const cantidad = (clave: string): number =>
     Math.max(0, Math.trunc(n(clave)));
 
-  // Errores graves: únicamente penaltis y rojas incorrectos.
-  const graves =
-    cantidad("penalti_incorrecto") +
-    cantidad("roja_incorrecta");
-
-  // Errores leves.
-  const clavesLeves = [
-    "amarilla_incorrecta",
-    "falta_incorrecta",
-    "falta_peligrosa_incorrecta",
-    "ventaja_mal_aplicada",
-    "saque_puerta_incorrecto",
-    "corner_incorrecto",
-    "saque_banda_incorrecto",
-    "fuera_juego_incorrecto",
-    "anadido_incorrecto",
-    "mal_control",
-    "mala_intervencion_var"
-  ];
-
-  const erroresCriterios = clavesLeves.reduce(
-    (total, clave) => total + cantidad(clave),
-    0
-  );
-
-  const erroresAcciones = lista.filter(
-    a => a.decision === "incorrecta"
-  ).length;
-
-  const leves = erroresCriterios + erroresAcciones;
+  const { maximo } = obtenerDetalleArbitral(c, lista);
 
   // Córner, banda y puerta:
   // +0,02 por acierto, máximo conjunto +0,50.
@@ -145,31 +184,10 @@ export function calcularNotaArbitral(
     // Acciones relevantes.
     ajusteAcciones;
 
-  // Máximo por errores graves.
-  const maximoGraves =
-    graves === 0 ? 10 :
-    graves === 1 ? 8.5 :
-    graves === 2 ? 7 :
-    4.5;
-
-  // Cada cinco errores leves reducen
-  // el máximo en 0,50 puntos.
-  const reduccionLeves = Math.floor(leves / 5) * 0.5;
-
-  const maximoFinal = Math.max(
-    0,
-    maximoGraves - reduccionLeves
-  );
-
-  const penalizacionVAR =
-    Number(c["correccion_tras_var"] ?? 0) > 0 ||
-    lista.some((accion) => accion.correccionTrasVAR === true)
-      ? 1 : 0;
-
-  // Nota final entre 0 y el máximo permitido.
+  // Aplicar todos los límites acumulados.
   const resultado = Math.max(
     0,
-    Math.min(notaBruta, maximoFinal - penalizacionVAR)
+    Math.min(notaBruta, maximo)
   );
 
   return Math.round(resultado * 100) / 100;
