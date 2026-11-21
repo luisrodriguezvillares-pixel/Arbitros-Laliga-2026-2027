@@ -803,7 +803,7 @@ valorador_nombre:
         </header>
 
         {/* RESUMEN DEL PARTIDO */}
-        <section className="mt-10 rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-2xl">
+        <section className="mt-10 rounded-[32px] border-2 border-slate-400/30 bg-slate-950/20 p-6 shadow-2xl">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
             Partido
           </p>
@@ -922,7 +922,7 @@ valorador_nombre:
           <div className="mt-6 grid gap-6">
 
   {/* CONTROL Y COLOCACIÓN */}
-<div className="rounded-[28px] border border-white/10 bg-black/30 p-6">
+<div className="rounded-[28px] border-2 border-sky-400/40 bg-sky-950/15 p-6">
   <h3 className="text-lg font-black text-blue-300">
     Control y colocación
   </h3>
@@ -965,7 +965,7 @@ valorador_nombre:
 </div>
 
   {/* TARJETAS */}
-<div className="rounded-[28px] border border-white/10 bg-black/30 p-6">
+<div className="rounded-[28px] border-2 border-yellow-400/35 bg-yellow-950/15 p-6">
   <h3 className="text-lg font-black text-yellow-300">
     Tarjetas
   </h3>
@@ -973,7 +973,7 @@ valorador_nombre:
   <div className="mt-5 grid gap-5 lg:grid-cols-2">
 
     {/* TARJETAS AMARILLAS */}
-    <div className="rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-4">
+    <div className="rounded-2xl border-2 border-yellow-400/40 bg-yellow-950/15 p-4">
       <p className="mb-3 text-base font-black uppercase tracking-[0.16em] text-yellow-400">
   Tarjetas amarillas
 </p>
@@ -1007,7 +1007,7 @@ valorador_nombre:
     </div>
 
     {/* TARJETAS ROJAS */}
-    <div className="rounded-2xl border border-red-400/20 bg-red-400/5 p-4">
+    <div className="rounded-2xl border-2 border-red-400/40 bg-red-950/15 p-4">
       <p className="mb-3 text-base font-black uppercase tracking-[0.16em] text-red-400">
   Tarjetas rojas
 </p>
@@ -1044,7 +1044,7 @@ valorador_nombre:
 </div>
 
   {/* PENALTIS */}
-<div className="rounded-[28px] border border-white/10 bg-black/30 p-6">
+<div className="rounded-[28px] border-2 border-orange-400/40 bg-orange-950/15 p-6">
   <h3 className="text-lg font-black text-orange-300">
     Penaltis
   </h3>
@@ -1077,7 +1077,7 @@ valorador_nombre:
 
   
   {/* FALTAS, VENTAJA Y BALÓN PARADO */}
-<div className="rounded-[28px] border border-white/10 bg-black/30 p-6">
+<div className="rounded-[28px] border-2 border-cyan-400/40 bg-cyan-950/15 p-6">
   <h3 className="text-lg font-black text-cyan-300">
     Faltas y ventaja
   </h3>
@@ -1111,7 +1111,7 @@ valorador_nombre:
     ))}
   </div>
 
-  <div className="mt-6 border-t border-white/10 pt-5">
+  <div className="mt-6 rounded-[22px] border-2 border-teal-400/35 bg-teal-950/15 p-5">
     <h4 className="font-black text-white">
       Balón parado
     </h4>
@@ -1187,7 +1187,7 @@ valorador_nombre:
 </div>
 
   {/* TIEMPO AÑADIDO */}
-  <div className="rounded-[28px] border border-white/10 bg-black/30 p-6">
+  <div className="rounded-[28px] border-2 border-violet-400/40 bg-violet-950/15 p-6">
     <h3 className="text-lg font-black text-purple-300">
       Tiempo añadido
     </h3>
@@ -1223,7 +1223,7 @@ valorador_nombre:
 
 
         {/* COLOR */}
-        <section className="mb-8 rounded-[28px] border border-white/10 bg-white/5 p-6">
+        <section className="mb-8 rounded-[28px] border-2 border-indigo-400/40 bg-indigo-950/15 p-6">
           <label
             htmlFor="color-valoracion"
             className="mb-3 block text-lg font-black text-white"
@@ -1249,7 +1249,7 @@ valorador_nombre:
         
 
         {/* DECISIONES CLAVE */}
-        <section className="mt-10">
+        <section className="mt-10 rounded-[28px] border-2 border-amber-400/40 bg-amber-950/15 p-6">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-300">
             Decisiones clave
           </p>
@@ -1426,7 +1426,7 @@ valorador_nombre:
         </section>
       
 {/* COMENTARIO GENERAL DEL ARBITRAJE */}
-        <section className="mb-8 rounded-[28px] border border-blue-400/20 bg-white/5 p-6">
+        <section className="mb-8 rounded-[28px] border-2 border-blue-400/40 bg-blue-950/15 p-6">
           <label
             htmlFor="comentario-arbitraje"
             className="block text-xl font-black text-white"
@@ -1455,7 +1455,7 @@ valorador_nombre:
         </section>
 
       {/* LEYENDA DE EVALUACIÓN */}
-<section className="mt-10 rounded-[32px] border border-white/10 bg-black/30 p-6">
+<section className="mt-10 rounded-[32px] border-2 border-slate-400/40 bg-black/30 p-6">
   <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-300">
     Criterio de valoración
   </p>
@@ -1522,7 +1522,7 @@ valorador_nombre:
 </section>
 
         {/* NOTA FINAL */}
-        <section className="mt-10 rounded-[32px] border border-blue-400/20 bg-blue-500/10 p-8">
+        <section className="mt-10 rounded-[32px] border-2 border-emerald-400/40 bg-emerald-950/15 p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-300">
