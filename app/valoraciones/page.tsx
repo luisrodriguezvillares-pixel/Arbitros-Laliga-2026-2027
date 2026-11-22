@@ -7,6 +7,7 @@ import { teams } from "../data/teams";
 import { getRefereeById } from "../data/referees";
 import { Suspense, useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import MaterialArbitralEditable from "../components/MaterialArbitralEditable";
 import { calcularNotaArbitral, obtenerDetalleArbitral } from "../../lib/notaArbitral";
 
 const teamSlugByMatchName: Record<string, string> = {
@@ -854,6 +855,7 @@ valorador_nombre:
   Árbitro principal
 </p>
     {referee ? (
+      <>
       <div className="mt-5 flex items-center gap-5">
         <div className="flex h-28 w-28 shrink-0 items-end justify-center overflow-hidden rounded-2xl bg-slate-900">
           <img
@@ -869,6 +871,11 @@ valorador_nombre:
           </h2>
         </div>
       </div>
+      <MaterialArbitralEditable
+        nombre={referee.name}
+        puedeEditar={perfil?.rol === "admin"}
+      />
+      </>
     ) : (
       <h2 className="mt-2 text-2xl font-black">
         Pendiente de designación
