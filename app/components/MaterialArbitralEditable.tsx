@@ -270,6 +270,18 @@ export default function MaterialArbitralEditable({
               >
                 ✕ Incorrecto
               </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setEditando(null);
+                  setMensaje("Sin cambios: se mantiene el dato registrado.");
+                }}
+                className="rounded-lg border border-slate-400/25 bg-slate-700/20 px-3 py-1 text-xs font-bold text-slate-300 transition hover:bg-slate-700/40"
+              >
+                ? No estoy seguro
+              </button>
+
             </div>
           </div>
         ))}
