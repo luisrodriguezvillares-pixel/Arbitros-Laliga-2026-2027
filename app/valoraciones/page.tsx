@@ -1267,6 +1267,27 @@ valorador_nombre:
             <input
               id="accion-cambio-var"
               type="checkbox"
+              checked={
+                (criterios.correccion_tras_var ?? 0) > 0 ||
+                accionesRelevantes.some(
+                  (accion) => accion.correccionTrasVAR === true
+                )
+              }
+              onChange={(e) => {
+                const marcado = e.target.checked;
+                setCriterios((actual) => ({
+                  ...actual,
+                  correccion_tras_var: marcado ? 1 : 0,
+                }));
+                if (!marcado) {
+                  setAccionesRelevantes((actual) =>
+                    actual.map((accion) => ({
+                      ...accion,
+                      correccionTrasVAR: false,
+                    }))
+                  );
+                }
+              }}
               className="h-5 w-5 accent-amber-400"
             />
             El árbitro cambió su decisión después de revisar el VAR
@@ -1356,7 +1377,7 @@ valorador_nombre:
         minutoInput.value = "";
         accionInput.value = "";
         valorInput.value = "";
-        if (marcaVAR) marcaVAR.checked = false;
+        // La corrección VAR permanece marcada y guardada.
       }}
       className="rounded-2xl bg-blue-600 px-6 py-3 font-black text-white shadow-lg transition hover:bg-blue-500"
     >

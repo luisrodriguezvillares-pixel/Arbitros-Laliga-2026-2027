@@ -3,13 +3,14 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { supabase } from "../../lib/supabase";
 
-type Campo = "silbato" | "tarjetas";
+type Campo = "silbato" | "tarjetas" | "lleva_tarjetas";
 
 type Ficha = {
   id: number;
   nombre_apellidos: string;
   silbato: string | null;
   tarjetas: string | null;
+  lleva_tarjetas: string | null;
 };
 
 function normalizar(texto: string) {
@@ -32,12 +33,13 @@ export default function MaterialArbitralEditable({
   const [cargando, setCargando] = useState(true);
   const [confirmado, setConfirmado] = useState<
     Record<Campo, boolean>
-  >({ silbato: false, tarjetas: false });
+  >({ silbato: false, tarjetas: false, lleva_tarjetas: false });
 
   const [editando, setEditando] = useState<Campo | null>(null);
   const [noEstoySeguro, setNoEstoySeguro] = useState({
     silbato: false,
     tarjetas: false,
+    lleva_tarjetas: false,
   });
 
   const [nuevoValor, setNuevoValor] = useState("");
@@ -56,7 +58,7 @@ export default function MaterialArbitralEditable({
 
       const { data, error } = await supabase
         .from("arbitros")
-        .select("id,nombre_apellidos,silbato,tarjetas")
+        .select("id,nombre_apellidos,silbato,tarjetas,lleva_tarjetas")
         .limit(150);
 
       if (cancelado) return;
@@ -92,6 +94,10 @@ export default function MaterialArbitralEditable({
           localStorage.getItem(
             `material-confirmado:${actual.id}:tarjetas`
           ) === (actual.tarjetas ?? ""),
+        lleva_tarjetas:
+          localStorage.getItem(
+            `material-confirmado:${actual.id}:lleva_tarjetas`
+          ) === (actual.lleva_tarjetas ?? ""),
       });
     }
 
@@ -169,13 +175,15 @@ export default function MaterialArbitralEditable({
       const cambios =
         campo === "silbato"
           ? { silbato: valor }
-          : { tarjetas: valor };
+          : campo === "tarjetas"
+          ? { tarjetas: valor }
+          : { lleva_tarjetas: valor };
 
       const { data, error } = await supabase
         .from("arbitros")
         .update(cambios)
         .eq("id", ficha.id)
-        .select("id,nombre_apellidos,silbato,tarjetas")
+        .select("id,nombre_apellidos,silbato,tarjetas,lleva_tarjetas")
         .single();
 
       if (error || !data) {
@@ -236,13 +244,25 @@ export default function MaterialArbitralEditable({
   return (
     <div className="mt-5 space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
-        {(["silbato", "tarjetas"] as const).map((campo) => (
+        {(["silbato", "tarjetas", "lleva_tarjetas"] as const).map((campo) => (
           <div
             key={campo}
-            className="rounded-2xl border border-blue-400/25 bg-slate-950/40 p-4"
+            className={
+              campo === "lleva_tarjetas"
+                ? "sm:col-span-2 rounded-xl border border-white/10 bg-slate-950/20 px-4 py-3"
+                : "rounded-2xl border border-blue-400/25 bg-slate-950/40 p-4"
+            }
           >
-            <p className="text-xs font-black uppercase text-blue-300">
-              {campo === "silbato" ? "Silbato" : "🟨🟥 Tarjetas"}
+            <p className={
+                campo === "lleva_tarjetas"
+                  ? "text-[11px] font-bold uppercase tracking-wide text-slate-400"
+                  : "text-xs font-black uppercase text-blue-300"
+              }>
+              {campo === "silbato"
+                ? "Silbato"
+                : campo === "tarjetas"
+                ? "🟨🟥 Tarjetas"
+                : "Dónde lleva las tarjetas"}
             </p>
 
             <p className="mt-2 break-words text-sm font-semibold text-white">
@@ -315,7 +335,11 @@ export default function MaterialArbitralEditable({
           className="space-y-3 rounded-2xl border border-amber-400/30 bg-slate-950/60 p-4"
         >
           <p className="text-sm font-black text-amber-300">
-            Corregir {editando === "silbato" ? "silbato" : "tarjetas"}
+            Corregir {editando === "silbato"
+              ? "silbato"
+              : editando === "tarjetas"
+              ? "tarjetas"
+              : "dónde lleva las tarjetas"}
           </p>
 
           <label
