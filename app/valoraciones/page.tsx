@@ -1096,7 +1096,7 @@ valorador_nombre:
   ["falta_peligrosa_correcta", "Falta peligrosa bien pitada"],
   ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada"],
   ["ventaja_bien_aplicada", "Ventaja bien aplicada"],
-  ["ventaja_mal_aplicada", "Ventaja mal aplicada / no señalada (−0,50)"],
+  ["ventaja_mal_aplicada", "Ventaja mal aplicada / no señalada"],
 ].map(([key, label]) => (
       <div
         key={key}
