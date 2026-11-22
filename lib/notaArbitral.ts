@@ -158,7 +158,7 @@ export function calcularNotaArbitral(
 
     // Ventajas.
     cantidad("ventaja_bien_aplicada") * 0.25 -
-    cantidad("ventaja_mal_aplicada") * 0.25 +
+    cantidad("ventaja_mal_aplicada") * 0.50 +
 
     // Córneres, bandas y puertas correctos.
     positivosRutinarios -

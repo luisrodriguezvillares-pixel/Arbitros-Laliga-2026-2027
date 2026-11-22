@@ -1096,7 +1096,7 @@ valorador_nombre:
   ["falta_peligrosa_correcta", "Falta peligrosa bien pitada"],
   ["falta_peligrosa_incorrecta", "Falta peligrosa mal pitada / no pitada"],
   ["ventaja_bien_aplicada", "Ventaja bien aplicada"],
-  ["ventaja_mal_aplicada", "Ventaja mal aplicada / no señalada"],
+  ["ventaja_mal_aplicada", "Ventaja mal aplicada / no señalada (−0,50)"],
 ].map(([key, label]) => (
       <div
         key={key}
@@ -1479,7 +1479,7 @@ valorador_nombre:
   ["Penalti", "+1,50", "−1,50"],
   ["Falta", "+0,20", "−0,50"],
    ["Falta peligrosa", "+0,50", "−0,50"],
-  ["Ventaja", "+0,25", "−0,25"],
+  ["Ventaja", "+0,25", "−0,50"],
   ["Saque de puerta / córner / saque de banda", "+0,02", "−0,20"],
    ["Fuera de juego", "+0,02", "−0,20"],
   ["Tiempo añadido", "+0,25", "−0,25"],
