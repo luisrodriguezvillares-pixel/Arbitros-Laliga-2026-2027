@@ -35,6 +35,11 @@ export default function MaterialArbitralEditable({
   >({ silbato: false, tarjetas: false });
 
   const [editando, setEditando] = useState<Campo | null>(null);
+  const [noEstoySeguro, setNoEstoySeguro] = useState({
+    silbato: false,
+    tarjetas: false,
+  });
+
   const [nuevoValor, setNuevoValor] = useState("");
   const [comentario, setComentario] = useState("");
   const [guardando, setGuardando] = useState(false);
@@ -249,9 +254,15 @@ export default function MaterialArbitralEditable({
                 <input
                   type="checkbox"
                   checked={confirmado[campo]}
-                  onChange={(e) =>
-                    confirmar(campo, e.target.checked)
-                  }
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setNoEstoySeguro((actual) => ({
+                        ...actual,
+                        [campo]: false,
+                      }));
+                    }
+                    confirmar(campo, e.target.checked);
+                  }}
                   className="h-4 w-4 accent-emerald-500"
                 />
                 ✓ Correcto
@@ -271,16 +282,27 @@ export default function MaterialArbitralEditable({
                 ✕ Incorrecto
               </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setEditando(null);
-                  setMensaje("Sin cambios: se mantiene el dato registrado.");
-                }}
-                className="rounded-lg border border-slate-400/25 bg-slate-700/20 px-3 py-1 text-xs font-bold text-slate-300 transition hover:bg-slate-700/40"
-              >
-                ? No estoy seguro
-              </button>
+              <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-slate-400/25 bg-slate-700/20 px-3 py-1 text-xs font-bold text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={noEstoySeguro[campo]}
+                  onChange={(e) => {
+                    setNoEstoySeguro((actual) => ({
+                      ...actual,
+                      [campo]: e.target.checked,
+                    }));
+
+                    if (e.target.checked) {
+                      confirmar(campo, false);
+                      setEditando(null);
+                    }
+
+                    setMensaje("");
+                  }}
+                  className="h-4 w-4 accent-slate-400"
+                />
+                No estoy seguro
+              </label>
 
             </div>
           </div>
