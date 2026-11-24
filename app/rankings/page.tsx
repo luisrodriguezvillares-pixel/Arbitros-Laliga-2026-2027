@@ -111,6 +111,65 @@ function formatoNota(valor: number | null) {
   });
 }
 
+
+// Escala de colores progresiva para notas de 0 a 10.
+// Los puntos acumulados quedan fuera de esta escala.
+function mezclarColorRanking(
+  inicio: readonly [number, number, number],
+  fin: readonly [number, number, number],
+  factor: number
+): string {
+  const t = Math.max(0, Math.min(1, factor));
+
+  const r = Math.round(inicio[0] + (fin[0] - inicio[0]) * t);
+  const g = Math.round(inicio[1] + (fin[1] - inicio[1]) * t);
+  const b = Math.round(inicio[2] + (fin[2] - inicio[2]) * t);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function colorNotaRanking(valor: number | null): string {
+  if (valor === null || !Number.isFinite(valor)) {
+    return "#64748b";
+  }
+
+  const nota = Math.max(0, Math.min(10, valor));
+
+  // De 8 a 10: verde claro hasta verde intenso y elegante.
+  if (nota >= 8) {
+    return mezclarColorRanking(
+      [174, 244, 206],
+      [20, 168, 96],
+      (nota - 8) / 2
+    );
+  }
+
+  // De 6 a menos de 8: azul claro hasta azul intenso.
+  if (nota >= 6) {
+    return mezclarColorRanking(
+      [183, 218, 255],
+      [44, 124, 248],
+      (nota - 6) / 2
+    );
+  }
+
+  // De 5 a menos de 6: rojo suave progresivo.
+  if (nota >= 5) {
+    return mezclarColorRanking(
+      [255, 110, 120],
+      [255, 181, 181],
+      nota - 5
+    );
+  }
+
+  // Por debajo de 5: rojo intenso.
+  return mezclarColorRanking(
+    [194, 21, 46],
+    [247, 53, 75],
+    nota / 5
+  );
+}
+
 export default function RankingsPage() {
   const [vista, setVista] = useState<Vista>("general");
   const [orden, setOrden] = useState<Orden>("media");
@@ -759,15 +818,8 @@ async function eliminarValoracion(
                       {/* MEDIA */}
                       <td className="px-5 py-4 text-center">
                         <span
-                          className={`text-xl font-black ${
-                            fila.media === null
-                              ? "text-slate-600"
-                              : fila.media >= 8
-                              ? "text-emerald-300"
-                              : fila.media >= 6
-                              ? "text-blue-300"
-                              : "text-red-300"
-                          }`}
+                          className="text-xl font-black"
+                          style={{ color: colorNotaRanking(fila.media) }}
                         >
                           {formatoNota(fila.media)}
                         </span>
@@ -803,7 +855,10 @@ async function eliminarValoracion(
                                 }`}
                                 className="rounded-xl border border-white/10 bg-white/5 px-3 py-3"
                               >
-                                <p className="text-lg font-black text-white">
+                                <p
+                                  className="text-lg font-black"
+                                  style={{ color: colorNotaRanking(partido.nota) }}
+                                >
                                   {formatoNota(partido.nota)}
                                 </p>
 
