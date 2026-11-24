@@ -170,6 +170,117 @@ function colorNotaRanking(valor: number | null): string {
   );
 }
 
+
+function MedallaPosicion({ posicion }: { posicion: number }) {
+  const podio = posicion <= 3;
+
+  const colores =
+    posicion === 1
+      ? {
+          fondo: "#e8b32e",
+          borde: "#ffe18a",
+          interior: "#f8d66b",
+          cinta: "#c88b17",
+          texto: "#302007",
+        }
+      : posicion === 2
+      ? {
+          fondo: "#aab7c8",
+          borde: "#eef3fa",
+          interior: "#d9e2ee",
+          cinta: "#788aa3",
+          texto: "#172235",
+        }
+      : posicion === 3
+      ? {
+          fondo: "#a85520",
+          borde: "#edaa71",
+          interior: "#ca7842",
+          cinta: "#713918",
+          texto: "#ffffff",
+        }
+      : {
+          fondo: "#192337",
+          borde: "#37445b",
+          interior: "#222d43",
+          cinta: "#192337",
+          texto: "#a7b5cd",
+        };
+
+  return (
+    <div
+      className="flex justify-center"
+      title={`${posicion}º puesto`}
+    >
+      <svg
+        viewBox="0 0 48 56"
+        className="h-14 w-12 shrink-0 drop-shadow-md"
+        role="img"
+        aria-label={`${posicion}º puesto`}
+      >
+        {podio && (
+          <>
+            <path
+              d="M11 2 H23 L29 23 L20 27 Z"
+              fill={colores.cinta}
+            />
+            <path
+              d="M25 2 H37 L28 27 L19 23 Z"
+              fill={colores.fondo}
+            />
+            <path
+              d="M14 5 L21 20"
+              stroke={colores.borde}
+              strokeWidth="2"
+              opacity="0.7"
+            />
+            <path
+              d="M34 5 L27 20"
+              stroke={colores.borde}
+              strokeWidth="2"
+              opacity="0.7"
+            />
+          </>
+        )}
+
+        <path
+          d={
+            podio
+              ? "M24 14 L32 18 L39 25 L39 35 L33 44 L24 50 L15 44 L9 35 L9 25 L16 18 Z"
+              : "M24 9 L39 16 L39 34 L24 47 L9 34 L9 16 Z"
+          }
+          fill={colores.fondo}
+          stroke={colores.borde}
+          strokeWidth="2"
+        />
+
+        <path
+          d={
+            podio
+              ? "M24 19 L31 22 L35 28 L35 35 L30 41 L24 45 L18 41 L13 35 L13 28 L17 22 Z"
+              : "M24 15 L34 20 L34 32 L24 41 L14 32 L14 20 Z"
+          }
+          fill={colores.interior}
+          stroke={colores.borde}
+          strokeWidth="0.8"
+        />
+
+        <text
+          x="24"
+          y={podio ? "33" : "29"}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize={posicion >= 10 ? "15" : "19"}
+          fontWeight="900"
+          fill={colores.texto}
+        >
+          {posicion}
+        </text>
+      </svg>
+    </div>
+  );
+}
+
 export default function RankingsPage() {
   const [vista, setVista] = useState<Vista>("general");
   const [orden, setOrden] = useState<Orden>("media");
@@ -778,21 +889,8 @@ async function eliminarValoracion(
                     >
                       {/* POSICIÓN */}
                       <td className="sticky left-0 z-10 bg-slate-950 px-4 py-4">
-                        <span
-                          className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-black ${
-                            index === 0
-                              ? "bg-yellow-400 text-slate-950"
-                              : index === 1
-                              ? "bg-slate-300 text-slate-950"
-                              : index === 2
-                              ? "bg-amber-700 text-white"
-                              : "bg-white/5 text-slate-400"
-                          }`}
-                        >
-                          {index + 1}
-                        </span>
+                        <MedallaPosicion posicion={index + 1} />
                       </td>
-
                       {/* ÁRBITRO */}
                       <td className="sticky left-[65px] z-10 bg-slate-950 px-5 py-4">
                         <div className="flex items-center gap-3">
