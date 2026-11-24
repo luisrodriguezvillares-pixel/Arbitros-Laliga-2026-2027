@@ -281,6 +281,45 @@ function MedallaPosicion({ posicion }: { posicion: number }) {
   );
 }
 
+
+function PuestoRanking({
+  posicion,
+  total,
+}: {
+  posicion: number;
+  total: number;
+}) {
+  // Respetar las tres medallas del podio.
+  const esUltimo =
+    posicion > 3 && posicion > total - 3;
+
+  const esAnterior =
+    posicion > 3 &&
+    !esUltimo &&
+    posicion > total - 6;
+
+  if (esUltimo || esAnterior) {
+    return (
+      <div
+        className="flex h-14 w-12 items-center justify-center"
+        title={`${posicion}º puesto`}
+      >
+        <span
+          className={`flex h-11 w-11 items-center justify-center rounded-full border text-lg font-black shadow-sm ${
+            esUltimo
+              ? "border-rose-400/60 bg-rose-600 text-white"
+              : "border-orange-300/60 bg-orange-400 text-slate-950"
+          }`}
+        >
+          {posicion}
+        </span>
+      </div>
+    );
+  }
+
+  return <MedallaPosicion posicion={posicion} />;
+}
+
 export default function RankingsPage() {
   const [vista, setVista] = useState<Vista>("general");
   const [orden, setOrden] = useState<Orden>("media");
@@ -889,7 +928,10 @@ async function eliminarValoracion(
                     >
                       {/* POSICIÓN */}
                       <td className="sticky left-0 z-10 bg-slate-950 px-4 py-4">
-                        <MedallaPosicion posicion={index + 1} />
+                        <PuestoRanking
+                          posicion={index + 1}
+                          total={filas.length}
+                        />
                       </td>
                       {/* ÁRBITRO */}
                       <td className="sticky left-[65px] z-10 bg-slate-950 px-5 py-4">
